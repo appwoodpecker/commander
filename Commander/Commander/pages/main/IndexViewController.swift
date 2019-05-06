@@ -14,16 +14,21 @@ class IndexViewController: NSViewController {
     @IBOutlet weak var addLayout: NSView!
     @IBOutlet weak var editLayout: NSView!
     
+    var addVC: AddViewController?
+    var editVC: EditViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let addVC = AddViewController.init(nibName: "AddViewController", bundle: nil)
         let addView = addVC.view
         addView.autoresizingMask = NSView.AutoresizingMask.init(rawValue:(NSView.AutoresizingMask.width.rawValue | NSView.AutoresizingMask.height.rawValue))
         self.addLayout.addSubview(addView)
+        self.addVC = addVC;
         
         let editVC = EditViewController.init(nibName: "EditViewController", bundle: nil)
         let editView = editVC.view
         editView.autoresizingMask = NSView.AutoresizingMask.init(rawValue:(NSView.AutoresizingMask.width.rawValue | NSView.AutoresizingMask.height.rawValue))
         self.editLayout.addSubview(editView)
+        self.editVC = editVC;
     }    
 }

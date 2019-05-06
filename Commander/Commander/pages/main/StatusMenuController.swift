@@ -31,17 +31,12 @@ class StatusMenuController: NSObject {
         statusItem.menu = menu
         self.menu = menu;
         //load tools
-        let path = workPath()
-        let toolset = ToolService.shared().loadTool(path: path)
+        let toolset = ToolService.shared().loadTool()
         traverseAddMenuItem(toolSet: toolset, menu: menu)
         menuItem.title = "Add Cmd"
         menuItem.target = self;
         menuItem.action = #selector(StatusMenuController.addMenuSelected)
         menu.addItem(menuItem)
-    }
-
-    func workPath() -> String {
-        return"/Users/zhangxiaogang/Documents/GitHub/Commander/workspace"
     }
     
     func traverseAddMenuItem(toolSet:ToolSet, menu: NSMenu) {
@@ -80,8 +75,8 @@ class StatusMenuController: NSObject {
     
     @objc func toolMenuSelected(menuItem: NSMenuItem) {
         let toolItem = menuItem.representedObject as! ToolItem
-        let scriptPath = workPath().appendingPathComponent(toolItem.scriptPath)
-        let exe = ToolService.shared().exeForScriptFile(scriptPath)
+        let scriptPath = Config.shared().workPath().appendingPathComponent(toolItem.scriptPath)
+        let exe = Config.shared().exeForScriptFile(scriptPath)
         if let exePath = exe {
             let task = Process.init()
             task.launchPath = exePath
@@ -95,20 +90,6 @@ class StatusMenuController: NSObject {
         self.indexVC = indexVC
         self.window.contentViewController = self.indexVC
         self.window .makeKeyAndOrderFront(nil)
-    }
-    
-    func runShell(file path: String) {
-        let task = Process.init()
-        task.launchPath = "/bin/bash"
-        task.arguments = [path]
-        task.launch()
-    }
-    
-    func runPython(file path: String) {
-        let task = Process.init()
-        task.launchPath = "/usr/bin/python"
-        task.arguments = [path]
-        task.launch()
     }
     
 }

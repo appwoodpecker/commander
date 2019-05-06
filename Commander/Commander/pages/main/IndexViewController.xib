@@ -19,19 +19,19 @@
             <rect key="frame" x="0.0" y="0.0" width="604" height="441"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView fixedFrame="YES" initialItem="Dzc-m9-l7G" translatesAutoresizingMaskIntoConstraints="NO" id="14t-IU-odj">
+                <tabView fixedFrame="YES" initialItem="jSi-9Z-UXV" translatesAutoresizingMaskIntoConstraints="NO" id="14t-IU-odj">
                     <rect key="frame" x="-7" y="-10" width="618" height="457"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Add" identifier="" id="jSi-9Z-UXV">
-                            <view key="view" id="BjW-WO-aEV">
+                            <view key="view" ambiguous="YES" id="BjW-WO-aEV">
                                 <rect key="frame" x="10" y="33" width="598" height="411"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Edit" identifier="" id="Dzc-m9-l7G">
-                            <view key="view" ambiguous="YES" id="8Oq-wr-TCy">
+                            <view key="view" id="8Oq-wr-TCy">
                                 <rect key="frame" x="10" y="33" width="598" height="411"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>

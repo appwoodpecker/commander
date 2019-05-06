@@ -20,7 +20,8 @@ class ToolService: NSObject {
         return sharedInstance
     }
     
-    func loadTool(path: String) -> ToolSet {
+    func loadTool() -> ToolSet {
+        let path = Config.shared().workPath()
         let rootSet = ToolSet.init()
         rootSet.title = "root"
         rootSet.path = "/"
@@ -28,20 +29,6 @@ class ToolService: NSObject {
         rootSet.children = []
         traversePath(path: rootSet.path, parentSet: rootSet, workPath: path)
         return rootSet
-    }
-    
-    func supportScriptTypes() -> [String] {
-        return ["sh","py"]
-    }
-    
-    func exeForScriptFile(_ scriptPath: String) -> String? {
-        var exe: String?
-        if scriptPath.hasSuffix(".sh") {
-            exe = "/bin/bash"
-        }else if scriptPath.hasSuffix(".py") {
-            exe = "/usr/bin/python"
-        }
-        return exe
     }
     
     func traversePath(path: String, parentSet: ToolSet, workPath: String) {
@@ -54,7 +41,10 @@ class ToolService: NSObject {
             }
             let itemPath = filePath.appendingPathComponent(name)
             let attributes = try? fm .attributesOfItem(atPath: itemPath)
-            let type: String = attributes![FileAttributeKey.type] as! String
+            if attributes == nil {
+                continue;
+            }
+             let type: String = attributes![FileAttributeKey.type] as! String
             if(type == FileAttributeType.typeDirectory.rawValue) {
                 if name.hasSuffix("bundle") {
                     ///item
@@ -74,7 +64,7 @@ class ToolService: NSObject {
                         }
                     }
                     //script
-                    let types = supportScriptTypes()
+                    let types = Config.shared().supportScriptTypes()
                     var scriptFileName :String?
                     for type in types {
                         let fileName = "main." + type
