@@ -12,6 +12,7 @@
 		1BB62936227EC745005B1295 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB62934227EC745005B1295 /* MainMenu.xib */; };
 		1BB62942227ED53F005B1295 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB62940227ED53F005B1295 /* IndexViewController.swift */; };
 		1BB62943227ED53F005B1295 /* IndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB62941227ED53F005B1295 /* IndexViewController.xib */; };
+		1BB62947227FE6B8005B1295 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB62946227FE6B8005B1295 /* Extension.swift */; };
 		1F05267D227F1EFF003D84C1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05267B227F1EFF003D84C1 /* AddViewController.swift */; };
 		1F05267E227F1EFF003D84C1 /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F05267C227F1EFF003D84C1 /* AddViewController.xib */; };
 		1F052682227F1F18003D84C1 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F052680227F1F18003D84C1 /* EditViewController.swift */; };
@@ -31,6 +32,7 @@
 		1BB62938227EC745005B1295 /* Commander.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Commander.entitlements; sourceTree = "<group>"; };
 		1BB62940227ED53F005B1295 /* IndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
 		1BB62941227ED53F005B1295 /* IndexViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndexViewController.xib; sourceTree = "<group>"; };
+		1BB62946227FE6B8005B1295 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		1F05267B227F1EFF003D84C1 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		1F05267C227F1EFF003D84C1 /* AddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
 		1F052680227F1F18003D84C1 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		1BB6292F227EC742005B1295 /* Commander */ = {
 			isa = PBXGroup;
 			children = (
+				1BB62944227FE383005B1295 /* components */,
 				1BB6293E227ED521005B1295 /* pages */,
 				1BB62932227EC745005B1295 /* Assets.xcassets */,
 				1BB62930227EC742005B1295 /* AppDelegate.swift */,
@@ -100,6 +103,22 @@
 				1BB62941227ED53F005B1295 /* IndexViewController.xib */,
 			);
 			path = main;
+			sourceTree = "<group>";
+		};
+		1BB62944227FE383005B1295 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				1BB62945227FE38B005B1295 /* util */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		1BB62945227FE38B005B1295 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				1BB62946227FE6B8005B1295 /* Extension.swift */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 		1F05267A227F1A22003D84C1 /* add */ = {
@@ -208,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BB62947227FE6B8005B1295 /* Extension.swift in Sources */,
 				1F052689227FAADA003D84C1 /* ToolItem.swift in Sources */,
 				1F052682227F1F18003D84C1 /* EditViewController.swift in Sources */,
 				1F05268B227FAC55003D84C1 /* ToolSet.swift in Sources */,

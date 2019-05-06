@@ -13,9 +13,9 @@ class ToolSet: NSObject {
     var title: String!
     var path: String!
     var iconPath: String?
-    var children: [ToolItem]?
+    var children: [Any]!
     
-    func isTop() -> Bool {
+    func isRoot() -> Bool {
         return self.title == "root"
     }
     

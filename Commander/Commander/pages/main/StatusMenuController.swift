@@ -31,16 +31,64 @@ class StatusMenuController: NSObject {
         statusItem.menu = menu
         self.menu = menu;
         //load tools
-        let path = "/Users/zhangxiaogang/Desktop/workspace"
+        let path = workPath()
         let toolset = ToolService.shared().loadTool(path: path)
-        
+        traverseAddMenuItem(toolSet: toolset, menu: menu)
         menuItem.title = "Add Cmd"
         menuItem.target = self;
         menuItem.action = #selector(StatusMenuController.addMenuSelected)
         menu.addItem(menuItem)
-        
+    }
+
+    func workPath() -> String {
+        return"/Users/zhangxiaogang/Documents/GitHub/Commander/workspace"
     }
     
+    func traverseAddMenuItem(toolSet:ToolSet, menu: NSMenu) {
+        let children = toolSet.children
+        for item in children! {
+            if item is ToolItem {
+                let toolItem = item as! ToolItem
+                let menuItem = menuItemWithTool(toolItem)
+                menu.addItem(menuItem)
+            }else if item is ToolSet {
+                let toolSet = item as! ToolSet
+                let menuItem = menuItemWithToolSet(toolSet)
+                menu.addItem(menuItem)
+                let subMenu = menuItem.submenu!
+                traverseAddMenuItem(toolSet: toolSet, menu: subMenu)
+            }
+        }
+    }
+    
+    func menuItemWithTool(_ toolItem :ToolItem) -> NSMenuItem {
+        let menuItem = NSMenuItem.init()
+        menuItem.title = toolItem.title
+        menuItem.representedObject = toolItem
+        menuItem.target = self
+        menuItem.action = #selector(StatusMenuController.toolMenuSelected(menuItem:))
+        return menuItem
+    }
+    
+    func menuItemWithToolSet(_ toolSet :ToolSet) -> NSMenuItem {
+        let menuItem = NSMenuItem.init()
+        menuItem.title = toolSet.title
+        let subMenu = NSMenu.init()
+        menuItem.submenu = subMenu
+        return menuItem
+    }
+    
+    @objc func toolMenuSelected(menuItem: NSMenuItem) {
+        let toolItem = menuItem.representedObject as! ToolItem
+        let scriptPath = workPath().appendingPathComponent(toolItem.scriptPath)
+        let exe = ToolService.shared().exeForScriptFile(scriptPath)
+        if let exePath = exe {
+            let task = Process.init()
+            task.launchPath = exePath
+            task.arguments = [scriptPath]
+            task.launch()
+        }
+    }
     
     @objc func addMenuSelected() {
         let indexVC = IndexViewController.init(nibName: "IndexViewController", bundle: nil)

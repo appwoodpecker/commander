@@ -13,5 +13,6 @@ class ToolItem: NSObject {
     var title: String!
     var iconPath: String?
     var scriptPath: String!
+    var path: String!
     
 }
