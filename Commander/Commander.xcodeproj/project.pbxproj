@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BB39348228128FA00E09525 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB39346228128FA00E09525 /* SettingViewController.swift */; };
+		1BB39349228128FA00E09525 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB39347228128FA00E09525 /* SettingViewController.xib */; };
+		1BB3934C228129F300E09525 /* SettingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB3934B228129F300E09525 /* SettingCellView.swift */; };
+		1BB3934E22812A0300E09525 /* SettingCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB3934D22812A0300E09525 /* SettingCellView.xib */; };
 		1BB62931227EC742005B1295 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB62930227EC742005B1295 /* AppDelegate.swift */; };
 		1BB62933227EC745005B1295 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB62932227EC745005B1295 /* Assets.xcassets */; };
 		1BB62936227EC745005B1295 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB62934227EC745005B1295 /* MainMenu.xib */; };
-		1BB62942227ED53F005B1295 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB62940227ED53F005B1295 /* IndexViewController.swift */; };
-		1BB62943227ED53F005B1295 /* IndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB62941227ED53F005B1295 /* IndexViewController.xib */; };
 		1BB6294A22801CD6005B1295 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB6294922801CD6005B1295 /* Config.swift */; };
 		1BB6294D22801D75005B1295 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB6294C22801D75005B1295 /* Extension.swift */; };
 		1F05267D227F1EFF003D84C1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05267B227F1EFF003D84C1 /* AddViewController.swift */; };
 		1F05267E227F1EFF003D84C1 /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F05267C227F1EFF003D84C1 /* AddViewController.xib */; };
-		1F052682227F1F18003D84C1 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F052680227F1F18003D84C1 /* EditViewController.swift */; };
-		1F052683227F1F18003D84C1 /* EditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F052681227F1F18003D84C1 /* EditViewController.xib */; };
 		1F052685227FA85E003D84C1 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F052684227FA85E003D84C1 /* StatusMenuController.swift */; };
 		1F052689227FAADA003D84C1 /* ToolItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F052688227FAADA003D84C1 /* ToolItem.swift */; };
 		1F05268B227FAC55003D84C1 /* ToolSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05268A227FAC55003D84C1 /* ToolSet.swift */; };
@@ -25,20 +25,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BB39346228128FA00E09525 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		1BB39347228128FA00E09525 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		1BB3934B228129F300E09525 /* SettingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellView.swift; sourceTree = "<group>"; };
+		1BB3934D22812A0300E09525 /* SettingCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCellView.xib; sourceTree = "<group>"; };
 		1BB6292D227EC742005B1295 /* Commander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Commander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB62930227EC742005B1295 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BB62932227EC745005B1295 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BB62935227EC745005B1295 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		1BB62937227EC745005B1295 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BB62938227EC745005B1295 /* Commander.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Commander.entitlements; sourceTree = "<group>"; };
-		1BB62940227ED53F005B1295 /* IndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
-		1BB62941227ED53F005B1295 /* IndexViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndexViewController.xib; sourceTree = "<group>"; };
 		1BB6294922801CD6005B1295 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		1BB6294C22801D75005B1295 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		1F05267B227F1EFF003D84C1 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		1F05267C227F1EFF003D84C1 /* AddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
-		1F052680227F1F18003D84C1 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
-		1F052681227F1F18003D84C1 /* EditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
 		1F052684227FA85E003D84C1 /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		1F052688227FAADA003D84C1 /* ToolItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolItem.swift; sourceTree = "<group>"; };
 		1F05268A227FAC55003D84C1 /* ToolSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSet.swift; sourceTree = "<group>"; };
@@ -56,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BB3934A228129D700E09525 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				1BB3934B228129F300E09525 /* SettingCellView.swift */,
+				1BB3934D22812A0300E09525 /* SettingCellView.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		1BB62924227EC742005B1295 = {
 			isa = PBXGroup;
 			children = (
@@ -90,8 +99,7 @@
 		1BB6293E227ED521005B1295 /* pages */ = {
 			isa = PBXGroup;
 			children = (
-				1F05267F227F1F0C003D84C1 /* edit */,
-				1F05267A227F1A22003D84C1 /* add */,
+				1F05267A227F1A22003D84C1 /* setting */,
 				1BB6293F227ED528005B1295 /* main */,
 			);
 			path = pages;
@@ -102,8 +110,6 @@
 			children = (
 				1F052687227FA9ED003D84C1 /* model */,
 				1F052684227FA85E003D84C1 /* StatusMenuController.swift */,
-				1BB62940227ED53F005B1295 /* IndexViewController.swift */,
-				1BB62941227ED53F005B1295 /* IndexViewController.xib */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -124,22 +130,16 @@
 			path = config;
 			sourceTree = "<group>";
 		};
-		1F05267A227F1A22003D84C1 /* add */ = {
+		1F05267A227F1A22003D84C1 /* setting */ = {
 			isa = PBXGroup;
 			children = (
+				1BB3934A228129D700E09525 /* view */,
 				1F05267B227F1EFF003D84C1 /* AddViewController.swift */,
 				1F05267C227F1EFF003D84C1 /* AddViewController.xib */,
+				1BB39346228128FA00E09525 /* SettingViewController.swift */,
+				1BB39347228128FA00E09525 /* SettingViewController.xib */,
 			);
-			path = add;
-			sourceTree = "<group>";
-		};
-		1F05267F227F1F0C003D84C1 /* edit */ = {
-			isa = PBXGroup;
-			children = (
-				1F052680227F1F18003D84C1 /* EditViewController.swift */,
-				1F052681227F1F18003D84C1 /* EditViewController.xib */,
-			);
-			path = edit;
+			path = setting;
 			sourceTree = "<group>";
 		};
 		1F052687227FA9ED003D84C1 /* model */ = {
@@ -215,11 +215,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BB62943227ED53F005B1295 /* IndexViewController.xib in Resources */,
 				1BB62933227EC745005B1295 /* Assets.xcassets in Resources */,
-				1F052683227F1F18003D84C1 /* EditViewController.xib in Resources */,
 				1F05267E227F1EFF003D84C1 /* AddViewController.xib in Resources */,
 				1BB62936227EC745005B1295 /* MainMenu.xib in Resources */,
+				1BB3934E22812A0300E09525 /* SettingCellView.xib in Resources */,
+				1BB39349228128FA00E09525 /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,14 +231,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F052689227FAADA003D84C1 /* ToolItem.swift in Sources */,
-				1F052682227F1F18003D84C1 /* EditViewController.swift in Sources */,
 				1BB6294A22801CD6005B1295 /* Config.swift in Sources */,
 				1F05268B227FAC55003D84C1 /* ToolSet.swift in Sources */,
 				1F05268D227FACB8003D84C1 /* ToolService.swift in Sources */,
 				1BB6294D22801D75005B1295 /* Extension.swift in Sources */,
+				1BB3934C228129F300E09525 /* SettingCellView.swift in Sources */,
+				1BB39348228128FA00E09525 /* SettingViewController.swift in Sources */,
 				1BB62931227EC742005B1295 /* AppDelegate.swift in Sources */,
 				1F052685227FA85E003D84C1 /* StatusMenuController.swift in Sources */,
-				1BB62942227ED53F005B1295 /* IndexViewController.swift in Sources */,
 				1F05267D227F1EFF003D84C1 /* AddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

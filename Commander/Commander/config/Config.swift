@@ -29,8 +29,6 @@ class Config: NSObject {
         return scriptTypes
     }
     
-    
-    
     func exeForScriptFile(_ scriptPath: String) -> String? {
         var exe: String?
         if scriptPath.hasSuffix(".sh") {

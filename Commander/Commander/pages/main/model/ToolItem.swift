@@ -11,8 +11,15 @@ import Cocoa
 class ToolItem: NSObject {
     
     var title: String!
-    var iconPath: String?
-    var scriptPath: String!
+    var scriptFile: String!
     var path: String!
+    
+    func scriptPath() -> String {
+        return path.appendingPathComponent(scriptFile)
+    }
+    
+    func iconPath() -> String {
+        return path.appendingPathComponent("icon.png")
+    }
     
 }

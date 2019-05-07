@@ -25,7 +25,6 @@ class ToolService: NSObject {
         let rootSet = ToolSet.init()
         rootSet.title = "root"
         rootSet.path = "/"
-        rootSet.iconPath = nil
         rootSet.children = []
         traversePath(path: rootSet.path, parentSet: rootSet, workPath: path)
         return rootSet
@@ -49,8 +48,7 @@ class ToolService: NSObject {
                 if name.hasSuffix("bundle") {
                     ///item
                     var title: String?
-                    var scriptPath: String?
-                    var iconPath: String?
+                    var scriptFile: String?
                     var path: String?
                     //title
                     let manifestPath = itemPath.appendingPathComponent("manifest.json")
@@ -76,22 +74,14 @@ class ToolService: NSObject {
                         }
                     }
                     if scriptFileName != nil {
-                        scriptPath = parentSet.path.appendingPathComponent(name).appendingPathComponent(scriptFileName!)
-                    }
-                    //icon
-                    let iconfileName = "icon.png"
-                    let iconFilePath = itemPath.appendingPathComponent(iconfileName)
-                    let exists = fm.fileExists(atPath: iconFilePath)
-                    if exists {
-                        iconPath = parentSet.path.appendingPathComponent(name).appendingPathComponent(iconfileName)
+                        scriptFile = scriptFileName
                     }
                     //path
                     path = parentSet.path.appendingPathComponent(name)
-                    if title != nil && scriptPath != nil && path != nil {
+                    if title != nil && scriptFileName != nil && path != nil {
                         let toolItem = ToolItem.init()
                         toolItem.title = title
-                        toolItem.scriptPath = scriptPath
-                        toolItem.iconPath = iconPath
+                        toolItem.scriptFile = scriptFile
                         toolItem.path = path
                         parentSet.children!.append(toolItem)
                     }
@@ -99,23 +89,14 @@ class ToolService: NSObject {
                     //set
                     var title: String?
                     var path: String?
-                    var iconPath: String?
                     //title
                     title = name
                     //path
                     path = parentSet.path.appendingPathComponent(name)
-                    //iconPath
-                    let iconfileName = "icon.png"
-                    let iconFilePath = itemPath.appendingPathComponent(iconfileName)
-                    let exists = fm.fileExists(atPath: iconFilePath)
-                    if exists {
-                        iconPath = parentSet.path.appendingPathComponent(name).appendingPathComponent(iconfileName)
-                    }
                     if title != nil && path != nil {
                         let set = ToolSet.init()
                         set.title = title
                         set.path = path;
-                        set.iconPath = iconPath
                         set.children = []
                         parentSet.children.append(set)
                         //continue traverse

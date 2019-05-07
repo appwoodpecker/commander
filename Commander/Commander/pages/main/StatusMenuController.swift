@@ -11,6 +11,7 @@ import Cocoa
 class StatusMenuController: NSObject {
     
     var statusItem: NSStatusItem!
+    var toolSet: ToolSet!
     var menu: NSMenu!
     var window: NSWindow!
     var contentVC: NSViewController?
@@ -32,10 +33,11 @@ class StatusMenuController: NSObject {
         self.menu = menu;
         //load tools
         let toolset = ToolService.shared().loadTool()
+        self.toolSet = toolset
         traverseAddMenuItem(toolSet: toolset, menu: menu)
-        menuItem.title = "Add Cmd"
+        menuItem.title = "Setting"
         menuItem.target = self;
-        menuItem.action = #selector(StatusMenuController.addMenuSelected)
+        menuItem.action = #selector(StatusMenuController.settingMenuSelected)
         menu.addItem(menuItem)
     }
     
@@ -75,7 +77,7 @@ class StatusMenuController: NSObject {
     
     @objc func toolMenuSelected(menuItem: NSMenuItem) {
         let toolItem = menuItem.representedObject as! ToolItem
-        let scriptPath = Config.shared().workPath().appendingPathComponent(toolItem.scriptPath)
+        let scriptPath = Config.shared().workPath().appendingPathComponent(toolItem.scriptPath())
         let exe = Config.shared().exeForScriptFile(scriptPath)
         if let exePath = exe {
             let task = Process.init()
@@ -85,11 +87,12 @@ class StatusMenuController: NSObject {
         }
     }
     
-    @objc func addMenuSelected() {
-        let vc = AddViewController.init(nibName: "AddViewController", bundle: nil)
+    @objc func settingMenuSelected() {
+        let vc = SettingViewController.init(nibName: "SettingViewController", bundle: nil)
         self.contentVC = vc
+        vc.setToolset(toolset: self.toolSet)
         self.window.contentViewController = self.contentVC
-        self.window.title = "Add new tool"
+        self.window.title = "Setting"
         self.window.makeKeyAndOrderFront(nil)
     }
     

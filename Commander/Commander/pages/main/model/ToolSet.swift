@@ -12,11 +12,14 @@ class ToolSet: NSObject {
     
     var title: String!
     var path: String!
-    var iconPath: String?
     var children: [Any]!
     
     func isRoot() -> Bool {
         return self.title == "root"
+    }
+    
+    func iconPath() -> String {
+        return path.appendingPathComponent("icon.png")
     }
     
 }
