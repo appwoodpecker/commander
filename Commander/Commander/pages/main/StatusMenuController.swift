@@ -12,8 +12,8 @@ class StatusMenuController: NSObject {
     
     var statusItem: NSStatusItem!
     var menu: NSMenu!
-    var indexVC: IndexViewController?
     var window: NSWindow!
+    var contentVC: NSViewController?
     
     func setup() {
         //setup status item
@@ -86,10 +86,11 @@ class StatusMenuController: NSObject {
     }
     
     @objc func addMenuSelected() {
-        let indexVC = IndexViewController.init(nibName: "IndexViewController", bundle: nil)
-        self.indexVC = indexVC
-        self.window.contentViewController = self.indexVC
-        self.window .makeKeyAndOrderFront(nil)
+        let vc = AddViewController.init(nibName: "AddViewController", bundle: nil)
+        self.contentVC = vc
+        self.window.contentViewController = self.contentVC
+        self.window.title = "Add new tool"
+        self.window.makeKeyAndOrderFront(nil)
     }
     
 }

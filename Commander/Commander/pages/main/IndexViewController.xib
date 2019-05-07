@@ -16,17 +16,17 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="604" height="441"/>
+            <rect key="frame" x="0.0" y="0.0" width="679" height="524"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <tabView fixedFrame="YES" initialItem="jSi-9Z-UXV" translatesAutoresizingMaskIntoConstraints="NO" id="14t-IU-odj">
-                    <rect key="frame" x="-7" y="-10" width="618" height="457"/>
+                    <rect key="frame" x="-7" y="-10" width="693" height="540"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Add" identifier="" id="jSi-9Z-UXV">
                             <view key="view" ambiguous="YES" id="BjW-WO-aEV">
-                                <rect key="frame" x="10" y="33" width="598" height="411"/>
+                                <rect key="frame" x="10" y="33" width="673" height="494"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
@@ -39,7 +39,7 @@
                     </tabViewItems>
                 </tabView>
             </subviews>
-            <point key="canvasLocation" x="201" y="238.5"/>
+            <point key="canvasLocation" x="238.5" y="280"/>
         </customView>
     </objects>
 </document>
