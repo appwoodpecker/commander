@@ -8,16 +8,18 @@
 
 import Cocoa
 
-class SettingCellView: NSTableCellView {
+class SettingCellView: BaseCellView {
     
     @IBOutlet weak var titleLabel: NSTextField!
     @IBOutlet weak var toolButton: NSButton!
     @IBOutlet weak var toolsetButton: NSButton!
     @IBOutlet weak var moveupButton: NSButton!
     
-    weak var delegate: SettingCellDelegate?
+    weak var item: AnyObject?
     
-    func setData(_ item :Any) {
+    func setData(_ item :AnyObject) {
+        toolButton.isHidden = true
+        toolsetButton.isHidden = true
         if item is ToolItem {
             let toolItem = item as! ToolItem
             self.titleLabel.stringValue = toolItem.title
@@ -28,29 +30,36 @@ class SettingCellView: NSTableCellView {
             }else {
                 self.titleLabel.stringValue = toolSet.title
             }
+            toolButton.isHidden = false
+            toolsetButton.isHidden = false
         }
+        self.item = item
+    }
+    
+    func setMovable(_ movable: Bool) {
+        self.moveupButton.isHidden = !movable
     }
     
     @IBAction func toolAddButtonPressed(_ sender: Any) {
-        if let delegate = self.delegate {
+        if let delegate = self.delegate as? SettingCellDelegate {
             delegate.settingCellToolAddRequest(self)
         }
     }
     
     @IBAction func toolsetAddButtonPressed(_ sender: Any) {
-        if let delegate = self.delegate {
+        if let delegate = self.delegate as? SettingCellDelegate {
             delegate.settingCellToolsetAddRequest(self)
         }
     }
     
     @IBAction func moveupButtonPressed(_ sender: Any) {
-        if let delegate = self.delegate {
+        if let delegate = self.delegate as? SettingCellDelegate {
             delegate.settingCellMoveupRequest(self)
         }
     }
 }
 
-protocol SettingCellDelegate : AnyObject {
+protocol SettingCellDelegate : BaseCellViewDelegate {
     
     func settingCellToolAddRequest(_ cell: SettingCellView)
     

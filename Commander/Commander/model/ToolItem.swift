@@ -12,14 +12,22 @@ class ToolItem: NSObject {
     
     var title: String!
     var scriptFile: String!
-    var path: String!
+    var toolset: ToolSet!
+    
+    func fileName() -> String {
+        return self.title + ".bundle"
+    }
+    
+    func path() -> String {
+        return self.toolset.path.appendingPathComponent(fileName())
+    }
     
     func scriptPath() -> String {
-        return path.appendingPathComponent(scriptFile)
+        return path().appendingPathComponent(scriptFile)
     }
     
     func iconPath() -> String {
-        return path.appendingPathComponent("icon.png")
+        return path().appendingPathComponent("icon.png")
     }
     
 }

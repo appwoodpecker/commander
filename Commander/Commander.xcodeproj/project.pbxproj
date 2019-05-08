@@ -11,6 +11,8 @@
 		1BB39349228128FA00E09525 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB39347228128FA00E09525 /* SettingViewController.xib */; };
 		1BB3934C228129F300E09525 /* SettingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB3934B228129F300E09525 /* SettingCellView.swift */; };
 		1BB3934E22812A0300E09525 /* SettingCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB3934D22812A0300E09525 /* SettingCellView.xib */; };
+		1BB393522282939900E09525 /* BaseOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB393512282939900E09525 /* BaseOutlineView.swift */; };
+		1BB39354228293B100E09525 /* BaseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB39353228293B100E09525 /* BaseCellView.swift */; };
 		1BB62931227EC742005B1295 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB62930227EC742005B1295 /* AppDelegate.swift */; };
 		1BB62933227EC745005B1295 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB62932227EC745005B1295 /* Assets.xcassets */; };
 		1BB62936227EC745005B1295 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB62934227EC745005B1295 /* MainMenu.xib */; };
@@ -31,6 +33,8 @@
 		1BB39347228128FA00E09525 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		1BB3934B228129F300E09525 /* SettingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellView.swift; sourceTree = "<group>"; };
 		1BB3934D22812A0300E09525 /* SettingCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCellView.xib; sourceTree = "<group>"; };
+		1BB393512282939900E09525 /* BaseOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOutlineView.swift; sourceTree = "<group>"; };
+		1BB39353228293B100E09525 /* BaseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellView.swift; sourceTree = "<group>"; };
 		1BB6292D227EC742005B1295 /* Commander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Commander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB62930227EC742005B1295 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BB62932227EC745005B1295 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				1BB6294C22801D75005B1295 /* Extension.swift */,
+				1BB393512282939900E09525 /* BaseOutlineView.swift */,
+				1BB39353228293B100E09525 /* BaseCellView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -242,8 +248,10 @@
 				1F05268B227FAC55003D84C1 /* ToolSet.swift in Sources */,
 				1F05268D227FACB8003D84C1 /* ToolService.swift in Sources */,
 				1BB6294D22801D75005B1295 /* Extension.swift in Sources */,
+				1BB39354228293B100E09525 /* BaseCellView.swift in Sources */,
 				1BB3934C228129F300E09525 /* SettingCellView.swift in Sources */,
 				1BB39348228128FA00E09525 /* SettingViewController.swift in Sources */,
+				1BB393522282939900E09525 /* BaseOutlineView.swift in Sources */,
 				1BB62931227EC742005B1295 /* AppDelegate.swift in Sources */,
 				1F0526902281C853003D84C1 /* ToolsetAddViewController.swift in Sources */,
 				1F052685227FA85E003D84C1 /* StatusMenuController.swift in Sources */,

@@ -7,14 +7,21 @@
 //
 
 import Foundation
+import AppKit
 
 
 extension String {
     
     func appendingPathComponent(_ path: String) -> String {
-        let url = URL.init(string: self)?.appendingPathComponent(path)
-        let resultPath = url?.absoluteString
-        return resultPath!
+        let slashText = "/"
+        let hasSlash = self.hasSuffix(slashText) || path.hasPrefix(slashText)
+        var mPath = ""
+        mPath.append(self)
+        if !hasSlash {
+            mPath.append(slashText)
+        }
+        mPath.append(path)
+        return mPath
     }
     
     //test.py -> py

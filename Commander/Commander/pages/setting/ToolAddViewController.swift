@@ -16,8 +16,9 @@ class ToolAddViewController: NSViewController {
     @IBOutlet weak var scriptTypeButton: NSPopUpButton!
     
     var iconURL: URL?
-    
+    //add
     var toolset: ToolSet?
+    //edit
     var toolitem: ToolItem?
     var completionCallback: (() -> Void)?
     
@@ -128,20 +129,11 @@ class ToolAddViewController: NSViewController {
             let scriptURL = bundleURL.appendingPathComponent(scriptName)
             let scriptPath = scriptURL.path
             let scriptData = scriptText.data(using: String.Encoding.utf8)
-            var result = fm.createFile(atPath: scriptPath, contents: scriptData, attributes: nil)
+            let result = fm.createFile(atPath: scriptPath, contents: scriptData, attributes: nil)
             if !result {
                 return;
             }
-            //3.manifest
-            let configData = ["title" : name]
-            let manifestData = try? JSONSerialization.data(withJSONObject: configData, options: JSONSerialization.WritingOptions.init(rawValue: 0))
-            let manifestURL = bundleURL.appendingPathComponent("manifest.json")
-            let manifestPath = manifestURL.path
-            result = fm.createFile(atPath: manifestPath, contents: manifestData, attributes: nil)
-            if !result {
-                return;
-            }
-            //4.icon
+            //3.icon
             if let iconURL = self.iconURL {
                 let targetURL = bundleURL.appendingPathComponent("icon.png")
                 try? fm.copyItem(at: iconURL, to: targetURL)
@@ -158,42 +150,29 @@ class ToolAddViewController: NSViewController {
                 }
                 let scriptIndex = self.scriptTypeButton.indexOfSelectedItem
                 let scriptType = Config.shared().supportScriptTypes()[scriptIndex]
-                let bundlePath = Config.shared().workPath().appendingPathComponent(toolItem.path)
+                let setURL = toolItem.toolset.absoluteURL()
+                let newFileName = name + ".bundle"
                 let fm = FileManager.default
-                let bundleURL = URL.init(fileURLWithPath: bundlePath)
-                
-                //1.save code
+                //1.name
+                if toolItem.title != name {
+                    let oldURL = setURL.appendingPathComponent(toolItem.path())
+                    let newURL = setURL.appendingPathComponent(newFileName)
+                    try? fm.moveItem(at: oldURL, to: newURL)
+                    toolItem.title = name
+                }
+                let bundleURL = toolItem.toolset.absoluteURL().appendingPathComponent(newFileName)
+                //2.code
                 let scriptName = "main." + scriptType
-                let scriptPath = bundlePath.appendingPathComponent(scriptName)
                 if let scriptData = scriptText.data(using: String.Encoding.utf8) {
-                    let scriptURL = URL.init(fileURLWithPath: scriptPath)
+                    let scriptURL = bundleURL.appendingPathComponent(scriptName)
                     try? scriptData.write(to:scriptURL)
+                    toolItem.scriptFile = scriptName
                 }
-                //2.manifest
-                var configData: [String:Any]?
-                let manifestPath = bundlePath.appendingPathComponent("manifest.json")
-                if let manifestData = NSData.init(contentsOfFile: manifestPath) {
-                    configData = try? JSONSerialization.jsonObject(with: manifestData as Data, options: JSONSerialization.ReadingOptions.init(rawValue: 0)) as! [String : Any]
-                }
-                if configData == nil {
-                    configData = ["title" : name]
-                }else {
-                    configData!["title"] = name
-                }
-                if configData != nil {
-                    if let manifestData = try? JSONSerialization.data(withJSONObject: configData!, options: JSONSerialization.WritingOptions.init(rawValue: 0)) {
-                        let manifestURL = URL.init(fileURLWithPath: manifestPath)
-                        try? manifestData.write(to: manifestURL)
-                    }
-                }
-                //4.icon
+                //3.icon
                 if let iconURL = self.iconURL {
                     let targetURL = bundleURL.appendingPathComponent("icon.png")
                     try? fm.copyItem(at: iconURL, to: targetURL)
                 }
-                
-                toolItem.title = name
-                toolItem.scriptFile = scriptName
                 
                 if let callback = self.completionCallback  {
                     callback()
