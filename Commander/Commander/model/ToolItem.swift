@@ -19,7 +19,7 @@ class ToolItem: NSObject {
     }
     
     func path() -> String {
-        return self.toolset.path.appendingPathComponent(fileName())
+        return self.toolset.absolutePath().appendingPathComponent(fileName())
     }
     
     func scriptPath() -> String {

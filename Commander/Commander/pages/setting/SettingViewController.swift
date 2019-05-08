@@ -17,6 +17,8 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
     
     @IBOutlet weak var outlineLayout: NSView!
     @IBOutlet weak var editLayout: NSView!
+    @IBOutlet weak var editDefaultLayout: NSTextField!
+    
     
     var editVC: AnyObject?
     var editView: NSView?
@@ -32,6 +34,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         let nib = NSNib.init(nibNamed: "SettingCellView", bundle: nil)
         self.outlineView.register(nib, forIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SettingCellView"))
         self.outlineView.rowHeight = 24.0
+        self.outlineView.usesAlternatingRowBackgroundColors = true
         setEditAreaWidth(preferedEditAreaWidth())
         
     }
@@ -79,31 +82,127 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let cell = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "SettingCellView"), owner: nil)  as! SettingCellView
         cell.setData(item as AnyObject)
-        let index = outlineView.childIndex(forItem: item)
-        cell.setMovable(index != 0)
         cell.delegate = self
         return cell
     }
     
-    func settingCellToolAddRequest(_ cell: SettingCellView) {
+    func cellClicked(_ cell: BaseCellView) {
         let row = self.outlineView.row(for: cell)
         let item = self.outlineView.item(atRow: row)
+        if item is ToolItem {
+            doEditTool(item as! ToolItem)
+        }else if item is ToolSet {
+            let toolset = item as! ToolSet
+            if !toolset.isRoot() {
+                doEditToolset(toolset)
+            }else {
+                resetEditArea()
+            }
+        }else {
+            resetEditArea()
+        }
+    }
+    
+    func cellDoubleClicked(_ cell: BaseCellView) {
+        let row = self.outlineView.row(for: cell)
+        let item = self.outlineView.item(atRow: row)
+        if item is ToolSet {
+            if !self.outlineView.isItemExpanded(item) {
+                self.outlineView.expandItem(item, expandChildren: false)
+            }else {
+                self.outlineView.collapseItem(item, collapseChildren: false)
+            }
+        }
+    }
+    
+    func cellRightClicked(_ cell: BaseCellView, position: NSPoint) {
+        let row = self.outlineView.row(for: cell)
+        let item = self.outlineView.item(atRow: row)
+        if item is ToolSet {
+            let menu = NSMenu.init()
+            let toolset = item as! ToolSet
+            //add tool
+            let toolItem = NSMenuItem.init()
+            toolItem.title = "Add Tool"
+            toolItem.representedObject = item
+            toolItem.target = self
+            toolItem.action = #selector(SettingViewController.addToolMenuClicked(_:))
+            menu.addItem(toolItem)
+            //add toolset
+            let setItem = NSMenuItem.init()
+            setItem.title = "Add Toolset"
+            setItem.representedObject = item
+            setItem.target = self
+            setItem.action = #selector(SettingViewController.addToolsetMenuClicked(_:))
+            menu.addItem(setItem)
+            //edit
+            if !toolset.isRoot() {
+                let editItem = NSMenuItem.init()
+                editItem.title = "Edit"
+                editItem.representedObject = item
+                editItem.target = self
+                editItem.action = #selector(SettingViewController.editMenuClicked(_:))
+                menu.addItem(editItem)
+            }
+            //move up
+            let index = outlineView.childIndex(forItem: item!)
+            if index > 0 {
+                let upItem = NSMenuItem.init()
+                upItem.title = "Move Up"
+                upItem.representedObject = item
+                upItem.target = self
+                upItem.action = #selector(SettingViewController.moveupMenuClicked(_:))
+                menu.addItem(upItem)
+            }
+            
+            menu.popUp(positioning: nil, at: position, in: cell)
+            
+        }else if item is ToolItem {
+            let menu = NSMenu.init()
+            //edit
+            let editItem = NSMenuItem.init()
+            editItem.title = "Edit"
+            editItem.representedObject = item
+            editItem.target = self
+            editItem.action = #selector(SettingViewController.editMenuClicked(_:))
+            menu.addItem(editItem)
+            //move up
+            let index = outlineView.childIndex(forItem: item!)
+            if index > 0 {
+                let upItem = NSMenuItem.init()
+                upItem.title = "Move Up"
+                upItem.representedObject = item
+                upItem.target = self
+                upItem.action = #selector(SettingViewController.moveupMenuClicked(_:))
+                menu.addItem(upItem)
+            }
+            
+            menu.popUp(positioning: nil, at: position, in: cell)
+        }
+    }
+    
+    @objc func addToolMenuClicked(_ menuItem: NSMenuItem) {
+        let item = menuItem.representedObject
+        if item == nil {
+            return;
+        }
         if item is ToolSet {
             doAddTool(item as! ToolSet)
         }
     }
     
-    func settingCellToolsetAddRequest(_ cell: SettingCellView) {
-        let row = self.outlineView.row(for: cell)
-        let item = self.outlineView.item(atRow: row)
+    @objc func addToolsetMenuClicked(_ menuItem: NSMenuItem) {
+        let item = menuItem.representedObject
+        if item == nil {
+            return;
+        }
         if item is ToolSet {
             doAddToolset(item as! ToolSet)
         }
     }
     
-    func settingCellMoveupRequest(_ cell: SettingCellView) {
-        let row = self.outlineView.row(for: cell)
-        let item = self.outlineView.item(atRow: row)
+    @objc func moveupMenuClicked(_ menuItem: NSMenuItem) {
+        let item = menuItem.representedObject
         if item == nil {
             return;
         }
@@ -128,40 +227,22 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         }
     }
     
-    func cellClicked(_ cell: BaseCellView) {
-        let row = self.outlineView.row(for: cell)
-        let item = self.outlineView.item(atRow: row)
+    @objc func editMenuClicked(_ menuItem: NSMenuItem) {
+        let item = menuItem.representedObject
+        if item == nil {
+            return;
+        }
         if item is ToolItem {
-            doEditTool(item as! ToolItem)
+            let toolItem = item as! ToolItem
+            doEditTool(toolItem)
         }else if item is ToolSet {
-            doEditToolset(item as! ToolSet)
-        }else {
-            resetEditArea()
-            self.setEditAreaWidth(0)
+            let toolSet = item as! ToolSet
+            doEditToolset(toolSet)
         }
     }
     
-    func cellDoubleClicked(_ cell: BaseCellView) {
-        let row = self.outlineView.row(for: cell)
-        let item = self.outlineView.item(atRow: row)
-        if item is ToolSet {
-            if !self.outlineView.isItemExpanded(item) {
-                self.outlineView.expandItem(item, expandChildren: false)
-            }else {
-                self.outlineView.collapseItem(item, collapseChildren: false)
-            }
-        }
-    }
-    
-    func cellRightClicked(_ cell: BaseCellView, position: NSPoint) {
-        
-    }
-    
-    func resetEditArea() {
-        if self.editView != nil {
-            self.editView?.removeFromSuperview()
-            self.editView = nil
-        }
+    func settingCellRefreshRequest(_ cell: SettingCellView) {
+        MenuController.shared().reloadMenu()
     }
     
     //add tool
@@ -175,10 +256,15 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         self.editView = view
         setEditAreaWidth(preferedEditAreaWidth())
         view.frame = self.editLayout.bounds
-        addVC.completionCallback = {
-            self.setEditAreaWidth(0)
-            self.outlineView.reloadData()
+        addVC.completionCallback = {(toolItem: ToolItem) -> Void in
+            self.outlineView.reloadItem(toolset, reloadChildren: true)
+            self.outlineView.expandItem(toolset)
+            self.resetEditArea()
+            self.outlineView.deselectAll(nil)
+            let toolIndex = self.outlineView.row(forItem: toolItem)
+            self.outlineView.selectRowIndexes(IndexSet.init(integer: toolIndex), byExtendingSelection: false)
         }
+        self.editDefaultLayout.isHidden = true
     }
     
     //edit tool
@@ -192,10 +278,10 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         self.editView = view
         setEditAreaWidth(preferedEditAreaWidth())
         view.frame = self.editLayout.bounds
-        addVC.completionCallback = {
-            self.setEditAreaWidth(0)
-            self.outlineView.reloadData()
+        addVC.completionCallback = {(toolItem: ToolItem) -> Void in
+            self.outlineView.reloadItem(toolItem)
         }
+        self.editDefaultLayout.isHidden = true
     }
     
     func doAddToolset(_ parentSet: ToolSet) {
@@ -208,10 +294,15 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         self.editView = view
         setEditAreaWidth(preferedEditAreaWidth())
         view.frame = self.editLayout.bounds
-        addVC.completionCallback = {
-            self.setEditAreaWidth(0)
-            self.outlineView.reloadData()
+        addVC.completionCallback = {(toolset: ToolSet) -> Void in
+            self.outlineView.reloadItem(parentSet, reloadChildren: true)
+            self.outlineView.expandItem(parentSet)
+            self.resetEditArea()
+            self.outlineView.deselectAll(nil)
+            let setIndex = self.outlineView.row(forItem: toolset)
+            self.outlineView.selectRowIndexes(IndexSet.init(integer: setIndex), byExtendingSelection: false)
         }
+        self.editDefaultLayout.isHidden = true
     }
     
     func doEditToolset(_ toolset: ToolSet) {
@@ -224,10 +315,10 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         self.editView = view
         setEditAreaWidth(preferedEditAreaWidth())
         view.frame = self.editLayout.bounds
-        addVC.completionCallback = {
-            self.setEditAreaWidth(0)
-            self.outlineView.reloadData()
+        addVC.completionCallback = { (toolset: ToolSet) -> Void in
+            self.outlineView.expandItem(toolset)
         }
+        self.editDefaultLayout.isHidden = true
     }
     
     func doSaveToolsetOrder(_ toolset: ToolSet) {
@@ -257,6 +348,14 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         if let fileData = try? JSONSerialization.data(withJSONObject: configData!, options: JSONSerialization.WritingOptions.init(rawValue: 0)) {
             let fileURL = URL.init(fileURLWithPath: configPath)
             try? fileData.write(to: fileURL)
+        }
+    }
+    
+    func resetEditArea() {
+        if self.editView != nil {
+            self.editView?.removeFromSuperview()
+            self.editView = nil
+            self.editDefaultLayout.isHidden = false
         }
     }
     

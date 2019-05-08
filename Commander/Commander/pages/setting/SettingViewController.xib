@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SettingViewController" customModule="Commander" customModuleProvider="target">
             <connections>
+                <outlet property="editDefaultLayout" destination="CRA-7F-aTJ" id="80h-wb-tFC"/>
                 <outlet property="editLayout" destination="J1T-fZ-tQp" id="uCJ-eo-p9w"/>
                 <outlet property="outlineLayout" destination="4eu-UZ-YXQ" id="vkl-ft-hNq"/>
                 <outlet property="outlineView" destination="B70-a6-piX" id="Yhn-ub-1v8"/>
@@ -20,29 +21,29 @@
             <rect key="frame" x="0.0" y="0.0" width="800" height="530"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" id="nT7-Us-2i0">
+                <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" id="nT7-Us-2i0">
                     <rect key="frame" x="0.0" y="5" width="800" height="525"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <customView id="4eu-UZ-YXQ">
-                            <rect key="frame" x="0.0" y="0.0" width="541" height="525"/>
+                            <rect key="frame" x="0.0" y="0.0" width="278" height="525"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="dds-Zh-Tfr">
-                                    <rect key="frame" x="0.0" y="-2" width="541" height="530"/>
+                                    <rect key="frame" x="0.0" y="-2" width="278" height="530"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <clipView key="contentView" id="OsQ-mM-Ctg">
-                                        <rect key="frame" x="0.0" y="0.0" width="541" height="530"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="278" height="530"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="3J5-8r-ScB" id="B70-a6-piX" customClass="BaseOutlineView" customModule="Commander" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="541" height="530"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="278" height="530"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                 <tableColumns>
-                                                    <tableColumn width="538" minWidth="40" maxWidth="1000" id="3J5-8r-ScB">
+                                                    <tableColumn width="275" minWidth="40" maxWidth="1000" id="3J5-8r-ScB">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -64,7 +65,7 @@
                                         </subviews>
                                     </clipView>
                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="W8e-6u-g5t">
-                                        <rect key="frame" x="0.0" y="514" width="345" height="16"/>
+                                        <rect key="frame" x="0.0" y="-11" width="0.0" height="16"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="E0F-vm-BWU">
@@ -75,8 +76,19 @@
                             </subviews>
                         </customView>
                         <customView id="J1T-fZ-tQp">
-                            <rect key="frame" x="551" y="0.0" width="249" height="525"/>
+                            <rect key="frame" x="279" y="0.0" width="521" height="525"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="CRA-7F-aTJ">
+                                    <rect key="frame" x="84" y="201" width="352" height="122"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" alignment="center" title="Hello" id="Sek-Rs-5RZ">
+                                        <font key="font" size="30" name="Zapfino"/>
+                                        <color key="textColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
                         </customView>
                     </subviews>
                     <holdingPriorities>
@@ -85,7 +97,7 @@
                     </holdingPriorities>
                 </splitView>
             </subviews>
-            <point key="canvasLocation" x="213.5" y="283"/>
+            <point key="canvasLocation" x="213" y="283"/>
         </customView>
     </objects>
 </document>

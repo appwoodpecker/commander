@@ -17,7 +17,7 @@ class ToolsetAddViewController: NSViewController {
     var parentSet: ToolSet?
     //edit
     var toolSet: ToolSet?
-    var completionCallback: (() -> Void)?
+    var completionCallback: ((ToolSet) -> Void)?
     var iconURL: URL?
     
     override func viewDidLoad() {
@@ -85,8 +85,15 @@ class ToolsetAddViewController: NSViewController {
                 let targetURL = setURL.appendingPathComponent("icon.png")
                 try? fm.copyItem(at: iconURL, to: targetURL)
             }
+            let toolSet = ToolSet.init()
+            toolSet.title = title;
+            toolSet.path = self.parentSet?.path.appendingPathComponent(title)
+            toolSet.children = [Any].init()
+            toolSet.parentSet = self.parentSet
+            self.parentSet?.children.append(toolSet)
+            
             if let callback = self.completionCallback  {
-                callback()
+                callback(toolSet)
             }
         }else {
             if let toolset = self.toolSet {
@@ -102,14 +109,17 @@ class ToolsetAddViewController: NSViewController {
                     let oldSetURL = parentURL.appendingPathComponent(toolset.title)
                     try? fm.moveItem(at: oldSetURL, to: setURL)
                     toolset.title = title
+                    toolset.path = toolset.parentSet?.path.appendingPathComponent(title)
                 }
                 //2. icon
                 if let iconURL = self.iconURL {
                     let targetURL = setURL.appendingPathComponent("icon.png")
+                    //remove old icon
+                    try? fm.removeItem(at: targetURL)
                     try? fm.copyItem(at: iconURL, to: targetURL)
                 }
                 if let callback = self.completionCallback  {
-                    callback()
+                    callback(toolset)
                 }
             }
         }

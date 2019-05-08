@@ -20,7 +20,7 @@
 		1BB6294D22801D75005B1295 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB6294C22801D75005B1295 /* Extension.swift */; };
 		1F05267D227F1EFF003D84C1 /* ToolAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05267B227F1EFF003D84C1 /* ToolAddViewController.swift */; };
 		1F05267E227F1EFF003D84C1 /* ToolAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F05267C227F1EFF003D84C1 /* ToolAddViewController.xib */; };
-		1F052685227FA85E003D84C1 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F052684227FA85E003D84C1 /* StatusMenuController.swift */; };
+		1F052685227FA85E003D84C1 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F052684227FA85E003D84C1 /* MenuController.swift */; };
 		1F052689227FAADA003D84C1 /* ToolItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F052688227FAADA003D84C1 /* ToolItem.swift */; };
 		1F05268B227FAC55003D84C1 /* ToolSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05268A227FAC55003D84C1 /* ToolSet.swift */; };
 		1F05268D227FACB8003D84C1 /* ToolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05268C227FACB8003D84C1 /* ToolService.swift */; };
@@ -45,7 +45,7 @@
 		1BB6294C22801D75005B1295 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		1F05267B227F1EFF003D84C1 /* ToolAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolAddViewController.swift; sourceTree = "<group>"; };
 		1F05267C227F1EFF003D84C1 /* ToolAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolAddViewController.xib; sourceTree = "<group>"; };
-		1F052684227FA85E003D84C1 /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
+		1F052684227FA85E003D84C1 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		1F052688227FAADA003D84C1 /* ToolItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolItem.swift; sourceTree = "<group>"; };
 		1F05268A227FAC55003D84C1 /* ToolSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSet.swift; sourceTree = "<group>"; };
 		1F05268C227FACB8003D84C1 /* ToolService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolService.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		1BB6293F227ED528005B1295 /* menu */ = {
 			isa = PBXGroup;
 			children = (
-				1F052684227FA85E003D84C1 /* StatusMenuController.swift */,
+				1F052684227FA85E003D84C1 /* MenuController.swift */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -254,7 +254,7 @@
 				1BB393522282939900E09525 /* BaseOutlineView.swift in Sources */,
 				1BB62931227EC742005B1295 /* AppDelegate.swift in Sources */,
 				1F0526902281C853003D84C1 /* ToolsetAddViewController.swift in Sources */,
-				1F052685227FA85E003D84C1 /* StatusMenuController.swift in Sources */,
+				1F052685227FA85E003D84C1 /* MenuController.swift in Sources */,
 				1F05267D227F1EFF003D84C1 /* ToolAddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

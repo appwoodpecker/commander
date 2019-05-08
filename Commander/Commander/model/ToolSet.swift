@@ -16,7 +16,7 @@ class ToolSet: NSObject {
     var parentSet: ToolSet?
     
     func isRoot() -> Bool {
-        return self.title == "root"
+        return self.path == "/"
     }
     
     func iconPath() -> String {

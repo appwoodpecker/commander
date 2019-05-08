@@ -9,11 +9,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <tableCellView id="pQT-yw-ovG" customClass="SettingCellView" customModule="Commander" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="211" height="24"/>
+            <rect key="frame" x="0.0" y="0.0" width="261" height="24"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-Ft-xiG">
-                    <rect key="frame" x="0.0" y="3" width="107" height="17"/>
+                    <rect key="frame" x="23" y="3" width="200" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="JCi-Vg-j6G">
                         <font key="font" metaFont="system"/>
@@ -21,48 +21,34 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gZm-Vb-zu7">
-                    <rect key="frame" x="107" y="-6" width="35" height="32"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EnQ-1g-Oww">
+                    <rect key="frame" x="7" y="5" width="14" height="14"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSHomeTemplate" id="bCe-8D-cEI"/>
+                </imageView>
+                <button toolTip="Reload Menu" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAh-6f-OIe">
+                    <rect key="frame" x="229" y="0.0" width="24" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="De5-Or-NuD">
+                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Ryl-L8-ZPk">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="toolAddButtonPressed:" target="pQT-yw-ovG" id="7Hb-lR-7eu"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Zf-D0-K8L">
-                    <rect key="frame" x="137" y="-6" width="47" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="F+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2gi-Fm-XYj">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toolsetAddButtonPressed:" target="pQT-yw-ovG" id="UG5-oX-U89"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbx-rW-cxd">
-                    <rect key="frame" x="178" y="-6" width="36" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="↑" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="weY-qt-vy1">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="moveupButtonPressed:" target="pQT-yw-ovG" id="Nji-aD-iiF"/>
+                        <action selector="refreshButtonPressed:" target="pQT-yw-ovG" id="F8I-gg-Wut"/>
                     </connections>
                 </button>
             </subviews>
             <connections>
-                <outlet property="moveupButton" destination="hbx-rW-cxd" id="Dov-gb-5Nc"/>
+                <outlet property="iconImageView" destination="EnQ-1g-Oww" id="ZMs-a9-BC3"/>
+                <outlet property="refreshButton" destination="jAh-6f-OIe" id="PfS-EQ-2ZQ"/>
                 <outlet property="textField" destination="Mte-Ft-xiG" id="WSi-km-SrY"/>
                 <outlet property="titleLabel" destination="Mte-Ft-xiG" id="zjm-Bg-LU8"/>
-                <outlet property="toolButton" destination="gZm-Vb-zu7" id="5T8-Rg-Evr"/>
-                <outlet property="toolsetButton" destination="9Zf-D0-K8L" id="guO-5E-cic"/>
             </connections>
-            <point key="canvasLocation" x="136.5" y="-97"/>
+            <point key="canvasLocation" x="161.5" y="-97"/>
         </tableCellView>
     </objects>
+    <resources>
+        <image name="NSHomeTemplate" width="14" height="14"/>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
+    </resources>
 </document>

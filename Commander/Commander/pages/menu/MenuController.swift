@@ -8,13 +8,23 @@
 
 import Cocoa
 
-class StatusMenuController: NSObject {
+class MenuController: NSObject {
     
     var statusItem: NSStatusItem!
     var toolSet: ToolSet!
     var menu: NSMenu!
     var window: NSWindow!
     var contentVC: NSViewController?
+    
+    private override init() {
+        
+    }
+    
+    private static let sharedInstance = MenuController.init()
+    
+    class func shared() -> MenuController {
+        return sharedInstance
+    }
     
     func setup() {
         //setup status item
@@ -26,19 +36,26 @@ class StatusMenuController: NSObject {
     }
     
     func loadContent() {
-        //main menu
-        let menu = NSMenu.init()
-        let menuItem = NSMenuItem.init()
-        statusItem.menu = menu
-        self.menu = menu;
         //load tools
         let toolset = ToolService.shared().loadTool()
         self.toolSet = toolset
-        traverseAddMenuItem(toolSet: toolset, menu: menu)
-        menuItem.title = "Setting"
-        menuItem.target = self;
-        menuItem.action = #selector(StatusMenuController.settingMenuSelected)
-        menu.addItem(menuItem)
+        //load menu
+        reloadMenu()
+    }
+    
+    func reloadMenu() {
+        if let toolSet = self.toolSet {
+            //menu
+            let menu = NSMenu.init()
+            let menuItem = NSMenuItem.init()
+            statusItem.menu = menu
+            self.menu = menu;
+            traverseAddMenuItem(toolSet:toolSet, menu: menu)
+            menuItem.title = "Setting"
+            menuItem.target = self;
+            menuItem.action = #selector(MenuController.settingMenuSelected)
+            menu.addItem(menuItem)
+        }
     }
     
     func traverseAddMenuItem(toolSet:ToolSet, menu: NSMenu) {
@@ -61,15 +78,25 @@ class StatusMenuController: NSObject {
     func menuItemWithTool(_ toolItem :ToolItem) -> NSMenuItem {
         let menuItem = NSMenuItem.init()
         menuItem.title = toolItem.title
+        let iconPath = toolItem.iconPath()
+        if let image = NSImage.init(contentsOfFile: iconPath) {
+            image.size = NSMakeSize(16, 16)
+            menuItem.image = image
+        }
         menuItem.representedObject = toolItem
         menuItem.target = self
-        menuItem.action = #selector(StatusMenuController.toolMenuSelected(menuItem:))
+        menuItem.action = #selector(MenuController.toolMenuSelected(menuItem:))
         return menuItem
     }
     
     func menuItemWithToolSet(_ toolSet :ToolSet) -> NSMenuItem {
         let menuItem = NSMenuItem.init()
         menuItem.title = toolSet.title
+        let iconPath = toolSet.iconPath()
+        if let image = NSImage.init(contentsOfFile: iconPath) {
+            image.size = NSMakeSize(16, 16)
+            menuItem.image = image
+        }
         let subMenu = NSMenu.init()
         menuItem.submenu = subMenu
         return menuItem
@@ -77,7 +104,7 @@ class StatusMenuController: NSObject {
     
     @objc func toolMenuSelected(menuItem: NSMenuItem) {
         let toolItem = menuItem.representedObject as! ToolItem
-        let scriptPath = Config.shared().workPath().appendingPathComponent(toolItem.scriptPath())
+        let scriptPath = toolItem.scriptPath()
         let exe = Config.shared().exeForScriptFile(scriptPath)
         if let exePath = exe {
             let task = Process.init()

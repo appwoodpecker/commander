@@ -12,11 +12,11 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var window: NSWindow!
-    var controller: StatusMenuController!
+    var controller: MenuController!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        let controller = StatusMenuController.init()
+        let controller = MenuController.shared()
         controller.window = self.window;
         controller.setup()
         self.controller = controller;

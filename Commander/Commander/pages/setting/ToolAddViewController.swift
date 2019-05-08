@@ -20,7 +20,7 @@ class ToolAddViewController: NSViewController {
     var toolset: ToolSet?
     //edit
     var toolitem: ToolItem?
-    var completionCallback: (() -> Void)?
+    var completionCallback: ((ToolItem) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +48,8 @@ class ToolAddViewController: NSViewController {
     func loadContent() {
         if isEdit() {
             if let toolItem = self.toolitem {
-                let workPath = Config.shared().workPath()
                 //icon
-                let iconPath = workPath.appendingPathComponent(toolItem.iconPath())
+                let iconPath = toolItem.iconPath()
                 let image = NSImage.init(contentsOfFile: iconPath)
                 self.iconImageView.image = image
                 //name
@@ -64,7 +63,7 @@ class ToolAddViewController: NSViewController {
                     }
                 }
                 //script code
-                let scriptPath = workPath.appendingPathComponent(toolItem.scriptPath())
+                let scriptPath = toolItem.scriptPath()
                 if let data = NSData.init(contentsOfFile: scriptPath) {
                     if let text = String.init(data: data as Data, encoding: String.Encoding.utf8) {
                         self.codeTextView.string = text
@@ -138,8 +137,13 @@ class ToolAddViewController: NSViewController {
                 let targetURL = bundleURL.appendingPathComponent("icon.png")
                 try? fm.copyItem(at: iconURL, to: targetURL)
             }
+            let toolItem = ToolItem.init()
+            toolItem.title = name
+            toolItem.scriptFile = scriptName
+            toolItem.toolset = self.toolset
+            self.toolset?.children.append(toolItem)
             if let callback = self.completionCallback  {
-                callback()
+                callback(toolItem)
             }
         }else {
             if let toolItem = self.toolitem {
@@ -171,11 +175,13 @@ class ToolAddViewController: NSViewController {
                 //3.icon
                 if let iconURL = self.iconURL {
                     let targetURL = bundleURL.appendingPathComponent("icon.png")
+                    //remove old icon
+                    try? fm.removeItem(at: targetURL)
                     try? fm.copyItem(at: iconURL, to: targetURL)
                 }
                 
                 if let callback = self.completionCallback  {
-                    callback()
+                    callback(toolItem)
                 }
             }
         }
