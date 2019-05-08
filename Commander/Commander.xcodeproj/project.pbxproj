@@ -16,12 +16,14 @@
 		1BB62936227EC745005B1295 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB62934227EC745005B1295 /* MainMenu.xib */; };
 		1BB6294A22801CD6005B1295 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB6294922801CD6005B1295 /* Config.swift */; };
 		1BB6294D22801D75005B1295 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB6294C22801D75005B1295 /* Extension.swift */; };
-		1F05267D227F1EFF003D84C1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05267B227F1EFF003D84C1 /* AddViewController.swift */; };
-		1F05267E227F1EFF003D84C1 /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F05267C227F1EFF003D84C1 /* AddViewController.xib */; };
+		1F05267D227F1EFF003D84C1 /* ToolAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05267B227F1EFF003D84C1 /* ToolAddViewController.swift */; };
+		1F05267E227F1EFF003D84C1 /* ToolAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F05267C227F1EFF003D84C1 /* ToolAddViewController.xib */; };
 		1F052685227FA85E003D84C1 /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F052684227FA85E003D84C1 /* StatusMenuController.swift */; };
 		1F052689227FAADA003D84C1 /* ToolItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F052688227FAADA003D84C1 /* ToolItem.swift */; };
 		1F05268B227FAC55003D84C1 /* ToolSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05268A227FAC55003D84C1 /* ToolSet.swift */; };
 		1F05268D227FACB8003D84C1 /* ToolService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05268C227FACB8003D84C1 /* ToolService.swift */; };
+		1F0526902281C853003D84C1 /* ToolsetAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05268E2281C853003D84C1 /* ToolsetAddViewController.swift */; };
+		1F0526912281C853003D84C1 /* ToolsetAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F05268F2281C853003D84C1 /* ToolsetAddViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,12 +39,14 @@
 		1BB62938227EC745005B1295 /* Commander.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Commander.entitlements; sourceTree = "<group>"; };
 		1BB6294922801CD6005B1295 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		1BB6294C22801D75005B1295 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		1F05267B227F1EFF003D84C1 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		1F05267C227F1EFF003D84C1 /* AddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
+		1F05267B227F1EFF003D84C1 /* ToolAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolAddViewController.swift; sourceTree = "<group>"; };
+		1F05267C227F1EFF003D84C1 /* ToolAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolAddViewController.xib; sourceTree = "<group>"; };
 		1F052684227FA85E003D84C1 /* StatusMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
 		1F052688227FAADA003D84C1 /* ToolItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolItem.swift; sourceTree = "<group>"; };
 		1F05268A227FAC55003D84C1 /* ToolSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSet.swift; sourceTree = "<group>"; };
 		1F05268C227FACB8003D84C1 /* ToolService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolService.swift; sourceTree = "<group>"; };
+		1F05268E2281C853003D84C1 /* ToolsetAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsetAddViewController.swift; sourceTree = "<group>"; };
+		1F05268F2281C853003D84C1 /* ToolsetAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolsetAddViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 			children = (
 				1BB6294822801C87005B1295 /* config */,
 				1BB62944227FE383005B1295 /* components */,
+				1F052687227FA9ED003D84C1 /* model */,
 				1BB6293E227ED521005B1295 /* pages */,
 				1BB62932227EC745005B1295 /* Assets.xcassets */,
 				1BB62930227EC742005B1295 /* AppDelegate.swift */,
@@ -100,18 +105,17 @@
 			isa = PBXGroup;
 			children = (
 				1F05267A227F1A22003D84C1 /* setting */,
-				1BB6293F227ED528005B1295 /* main */,
+				1BB6293F227ED528005B1295 /* menu */,
 			);
 			path = pages;
 			sourceTree = "<group>";
 		};
-		1BB6293F227ED528005B1295 /* main */ = {
+		1BB6293F227ED528005B1295 /* menu */ = {
 			isa = PBXGroup;
 			children = (
-				1F052687227FA9ED003D84C1 /* model */,
 				1F052684227FA85E003D84C1 /* StatusMenuController.swift */,
 			);
-			path = main;
+			path = menu;
 			sourceTree = "<group>";
 		};
 		1BB62944227FE383005B1295 /* components */ = {
@@ -134,8 +138,10 @@
 			isa = PBXGroup;
 			children = (
 				1BB3934A228129D700E09525 /* view */,
-				1F05267B227F1EFF003D84C1 /* AddViewController.swift */,
-				1F05267C227F1EFF003D84C1 /* AddViewController.xib */,
+				1F05267B227F1EFF003D84C1 /* ToolAddViewController.swift */,
+				1F05267C227F1EFF003D84C1 /* ToolAddViewController.xib */,
+				1F05268E2281C853003D84C1 /* ToolsetAddViewController.swift */,
+				1F05268F2281C853003D84C1 /* ToolsetAddViewController.xib */,
 				1BB39346228128FA00E09525 /* SettingViewController.swift */,
 				1BB39347228128FA00E09525 /* SettingViewController.xib */,
 			);
@@ -216,7 +222,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BB62933227EC745005B1295 /* Assets.xcassets in Resources */,
-				1F05267E227F1EFF003D84C1 /* AddViewController.xib in Resources */,
+				1F0526912281C853003D84C1 /* ToolsetAddViewController.xib in Resources */,
+				1F05267E227F1EFF003D84C1 /* ToolAddViewController.xib in Resources */,
 				1BB62936227EC745005B1295 /* MainMenu.xib in Resources */,
 				1BB3934E22812A0300E09525 /* SettingCellView.xib in Resources */,
 				1BB39349228128FA00E09525 /* SettingViewController.xib in Resources */,
@@ -238,8 +245,9 @@
 				1BB3934C228129F300E09525 /* SettingCellView.swift in Sources */,
 				1BB39348228128FA00E09525 /* SettingViewController.swift in Sources */,
 				1BB62931227EC742005B1295 /* AppDelegate.swift in Sources */,
+				1F0526902281C853003D84C1 /* ToolsetAddViewController.swift in Sources */,
 				1F052685227FA85E003D84C1 /* StatusMenuController.swift in Sources */,
-				1F05267D227F1EFF003D84C1 /* AddViewController.swift in Sources */,
+				1F05267D227F1EFF003D84C1 /* ToolAddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

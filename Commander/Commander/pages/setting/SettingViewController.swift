@@ -87,7 +87,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             self.editView?.removeFromSuperview()
             self.editView = nil
         }
-        let addVC = AddViewController.init(nibName: "AddViewController", bundle: nil)
+        let addVC = ToolAddViewController.init(nibName: "ToolAddViewController", bundle: nil)
         let row = self.outlineView.row(for: cell)
         let item = self.outlineView.item(atRow: row)
         if (item is ToolSet) {
@@ -97,10 +97,10 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         }
         self.editVC = addVC
         let view = addVC.view
-        view.frame = self.editLayout.bounds
         self.editLayout.addSubview(view)
         self.editView = view
         setEditAreaWidth(preferedEditAreaWidth())
+        view.frame = self.editLayout.bounds
         addVC.completionCallback = {
             self.setEditAreaWidth(0)
             self.outlineView.reloadData()
@@ -108,7 +108,26 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
     }
     
     func settingCellToolsetAddRequest(_ cell: SettingCellView) {
-        
+        if self.editView != nil {
+            self.editView?.removeFromSuperview()
+            self.editView = nil
+        }
+        let addVC = ToolsetAddViewController.init(nibName: "ToolsetAddViewController", bundle: nil)
+        let row = self.outlineView.row(for: cell)
+        let item = self.outlineView.item(atRow: row)
+        if (item is ToolSet) {
+            addVC.toolset = item as? ToolSet
+        }
+        self.editVC = addVC
+        let view = addVC.view
+        self.editLayout.addSubview(view)
+        self.editView = view
+        setEditAreaWidth(preferedEditAreaWidth())
+        view.frame = self.editLayout.bounds
+        addVC.completionCallback = {
+            self.setEditAreaWidth(0)
+            self.outlineView.reloadData()
+        }
     }
     
     func settingCellMoveupRequest(_ cell: SettingCellView) {

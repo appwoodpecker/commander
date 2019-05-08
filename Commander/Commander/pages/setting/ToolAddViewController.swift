@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class AddViewController: NSViewController {
+class ToolAddViewController: NSViewController {
     
     @IBOutlet weak var iconImageView: NSImageView!
     @IBOutlet weak var nameTextfield: NSTextField!
