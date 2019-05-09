@@ -2,7 +2,7 @@
 //  StatusMenuController.swift
 //  Commander
 //
-//  Created by 张小刚 on 2019/5/6.
+//  Created by zhangxiaogang on 2019/5/6.
 //  Copyright © 2019 woodpecker. All rights reserved.
 //
 
@@ -29,9 +29,8 @@ class MenuController: NSObject {
     func setup() {
         //setup status item
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.title = "🐶"
+        statusItem.button?.title = "🐈"
         self.statusItem = statusItem
-        //
         loadContent()
     }
     
@@ -91,8 +90,9 @@ class MenuController: NSObject {
         menuItem.title = toolItem.title
         let iconPath = toolItem.iconPath()
         if let image = NSImage.init(contentsOfFile: iconPath) {
-            image.size = NSMakeSize(16, 16)
-            menuItem.image = image
+            let roundImage = image.roundImage()
+            roundImage.size = NSMakeSize(16, 16)
+            menuItem.image = roundImage
         }
         menuItem.representedObject = toolItem
         menuItem.target = self
@@ -105,8 +105,9 @@ class MenuController: NSObject {
         menuItem.title = toolSet.title
         let iconPath = toolSet.iconPath()
         if let image = NSImage.init(contentsOfFile: iconPath) {
-            image.size = NSMakeSize(16, 16)
-            menuItem.image = image
+            let roundImage = image.roundImage()
+            roundImage.size = NSMakeSize(16, 16)
+            menuItem.image = roundImage
         }
         let subMenu = NSMenu.init()
         menuItem.submenu = subMenu
@@ -132,6 +133,7 @@ class MenuController: NSObject {
         self.window.contentViewController = self.contentVC
         self.window.title = "Setting"
         self.window.makeKeyAndOrderFront(nil)
+        self.window.orderFrontRegardless()
     }
     
     @objc func quitMenuSelected() {

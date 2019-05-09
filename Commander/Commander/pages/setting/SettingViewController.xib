@@ -11,6 +11,7 @@
                 <outlet property="editLayout" destination="J1T-fZ-tQp" id="uCJ-eo-p9w"/>
                 <outlet property="outlineLayout" destination="4eu-UZ-YXQ" id="vkl-ft-hNq"/>
                 <outlet property="outlineView" destination="B70-a6-piX" id="Yhn-ub-1v8"/>
+                <outlet property="settingButton" destination="Gn4-2Z-lOp" id="K5D-rL-yft"/>
                 <outlet property="splitView" destination="nT7-Us-2i0" id="bTf-OT-Yva"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -30,14 +31,14 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="dds-Zh-Tfr">
-                                    <rect key="frame" x="0.0" y="-2" width="278" height="530"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="278" height="493"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <clipView key="contentView" id="OsQ-mM-Ctg">
-                                        <rect key="frame" x="0.0" y="0.0" width="278" height="530"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="278" height="493"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="3J5-8r-ScB" id="B70-a6-piX" customClass="BaseOutlineView" customModule="Commander" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="278" height="530"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="278" height="493"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -73,6 +74,39 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                 </scrollView>
+                                <customView id="FOq-zq-0wM">
+                                    <rect key="frame" x="0.0" y="493" width="278" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <subviews>
+                                        <button toolTip="Update Menu Bar" verticalHuggingPriority="750" id="Ea1-wt-mPh">
+                                            <rect key="frame" x="244" y="4" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSShareTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="FXv-lw-plp">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="reloadActionButtonPressed:" target="-2" id="EGM-10-B6k"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Setting" verticalHuggingPriority="750" id="Gn4-2Z-lOp">
+                                            <rect key="frame" x="218" y="4" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSActionTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Z7L-QN-gdb">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="settingButtonPressed:" target="-2" id="2qA-YC-lBV"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </customView>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7Qy-Wb-aOp">
+                                    <rect key="frame" x="12" y="502" width="14" height="14"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSHomeTemplate" id="7Ab-NI-6lM"/>
+                                </imageView>
                             </subviews>
                         </customView>
                         <customView id="J1T-fZ-tQp">
@@ -100,4 +134,9 @@
             <point key="canvasLocation" x="213" y="283"/>
         </customView>
     </objects>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSHomeTemplate" width="14" height="14"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
+    </resources>
 </document>

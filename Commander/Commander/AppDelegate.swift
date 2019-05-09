@@ -16,10 +16,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         Config.shared().setupEnvt()
+        otherSetting()
         let controller = MenuController.shared()
         controller.window = self.window;
         controller.setup()
         self.controller = controller;
+    }
+    
+    func otherSetting() {
+        //disable smart quote
+        UserDefaults.standard.set(false, forKey: "NSAutomaticQuoteSubstitutionEnabled")
     }
    
     

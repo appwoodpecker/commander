@@ -2,7 +2,7 @@
 //  ToolService.swift
 //  Commander
 //
-//  Created by 张小刚 on 2019/5/6.
+//  Created by zhangxiaogang on 2019/5/6.
 //  Copyright © 2019 woodpecker. All rights reserved.
 //
 
@@ -218,7 +218,7 @@ class ToolService: NSObject {
         let fm = FileManager.default
         //1.name
         if toolItem.title != title {
-            let oldURL = setURL.appendingPathComponent(toolItem.path())
+            let oldURL = setURL.appendingPathComponent(toolItem.fileName())
             let newURL = setURL.appendingPathComponent(newFileName)
             try? fm.moveItem(at: oldURL, to: newURL)
             toolItem.title = title
