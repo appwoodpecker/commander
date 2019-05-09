@@ -108,78 +108,27 @@ class ToolAddViewController: NSViewController {
     @IBAction func addButtonPressed(_ sender: Any) {
         if isAddNew() {
             let scriptText = self.codeTextView.string
-            let name = self.nameTextfield.stringValue
-            if name.count == 0 || scriptText.count == 0 {
+            let title = self.nameTextfield.stringValue
+            if title.count == 0 || scriptText.count == 0 {
                 return;
             }
             let scriptIndex = self.scriptTypeButton.indexOfSelectedItem
             let scriptType = Config.shared().supportScriptTypes()[scriptIndex]
-            let groupPath = Config.shared().workPath().appendingPathComponent((self.toolset?.path)!)
-            let groupURL = URL.init(fileURLWithPath: groupPath)
-            
-            ///everything is okay, now let's create it
-            //1.tool bundle
-            let bundleName = name + ".bundle"
-            let bundleURL = groupURL.appendingPathComponent(bundleName)
-            let fm = FileManager.default
-            try? fm.createDirectory(at: bundleURL, withIntermediateDirectories: true, attributes: nil)
-            //2.save code
-            let scriptName = "main." + scriptType
-            let scriptURL = bundleURL.appendingPathComponent(scriptName)
-            let scriptPath = scriptURL.path
-            let scriptData = scriptText.data(using: String.Encoding.utf8)
-            let result = fm.createFile(atPath: scriptPath, contents: scriptData, attributes: nil)
-            if !result {
-                return;
-            }
-            //3.icon
-            if let iconURL = self.iconURL {
-                let targetURL = bundleURL.appendingPathComponent("icon.png")
-                try? fm.copyItem(at: iconURL, to: targetURL)
-            }
-            let toolItem = ToolItem.init()
-            toolItem.title = name
-            toolItem.scriptFile = scriptName
-            toolItem.toolset = self.toolset
-            self.toolset?.children.append(toolItem)
-            if let callback = self.completionCallback  {
-                callback(toolItem)
+            if let toolItem = ToolService.shared().doAddTool(title:title, scriptType: scriptType, scriptText: scriptText, iconURL: self.iconURL, parent: self.toolset!) {
+                if let callback = self.completionCallback  {
+                    callback(toolItem)
+                }
             }
         }else {
             if let toolItem = self.toolitem {
                 let scriptText = self.codeTextView.string
-                let name = self.nameTextfield.stringValue
-                if name.count == 0 || scriptText.count == 0 {
+                let title = self.nameTextfield.stringValue
+                if title.count == 0 || scriptText.count == 0 {
                     return;
                 }
                 let scriptIndex = self.scriptTypeButton.indexOfSelectedItem
                 let scriptType = Config.shared().supportScriptTypes()[scriptIndex]
-                let setURL = toolItem.toolset.absoluteURL()
-                let newFileName = name + ".bundle"
-                let fm = FileManager.default
-                //1.name
-                if toolItem.title != name {
-                    let oldURL = setURL.appendingPathComponent(toolItem.path())
-                    let newURL = setURL.appendingPathComponent(newFileName)
-                    try? fm.moveItem(at: oldURL, to: newURL)
-                    toolItem.title = name
-                }
-                let bundleURL = toolItem.toolset.absoluteURL().appendingPathComponent(newFileName)
-                //2.code
-                let scriptName = "main." + scriptType
-                if let scriptData = scriptText.data(using: String.Encoding.utf8) {
-                    let scriptURL = bundleURL.appendingPathComponent(scriptName)
-                    try? scriptData.write(to:scriptURL)
-                    toolItem.scriptFile = scriptName
-                }
-                //3.icon
-                if let iconURL = self.iconURL {
-                    let targetURL = bundleURL.appendingPathComponent("icon.png")
-                    //remove old icon
-                    try? fm.removeItem(at: targetURL)
-                    try? fm.copyItem(at: iconURL, to: targetURL)
-                }
-                
+                ToolService.shared().doEditTool(title: title, scriptType: scriptType, scriptText: scriptText, iconURL: self.iconURL, toolItem: toolItem)
                 if let callback = self.completionCallback  {
                     callback(toolItem)
                 }

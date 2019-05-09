@@ -154,6 +154,15 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
                 upItem.action = #selector(SettingViewController.moveupMenuClicked(_:))
                 menu.addItem(upItem)
             }
+            //remove
+            if !toolset.isRoot() {
+                let removeItem = NSMenuItem.init()
+                removeItem.title = "Delete"
+                removeItem.representedObject = item
+                removeItem.target = self
+                removeItem.action = #selector(SettingViewController.deleteMenuClicked(_:))
+                menu.addItem(removeItem)
+            }
             
             menu.popUp(positioning: nil, at: position, in: cell)
             
@@ -176,6 +185,13 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
                 upItem.action = #selector(SettingViewController.moveupMenuClicked(_:))
                 menu.addItem(upItem)
             }
+            //remove
+            let removeItem = NSMenuItem.init()
+            removeItem.title = "Delete"
+            removeItem.representedObject = item
+            removeItem.target = self
+            removeItem.action = #selector(SettingViewController.deleteMenuClicked(_:))
+            menu.addItem(removeItem)
             
             menu.popUp(positioning: nil, at: position, in: cell)
         }
@@ -222,7 +238,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
                 toolSet!.children.insert(item!, at: targetIndex)
                 self.outlineView.reloadItem(toolSet, reloadChildren: true)
                 //save sorted order
-                doSaveToolsetOrder(toolSet!)
+                ToolService.shared().doSaveToolsetOrder(toolSet!)
             }
         }
     }
@@ -238,6 +254,47 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         }else if item is ToolSet {
             let toolSet = item as! ToolSet
             doEditToolset(toolSet)
+        }
+    }
+    
+    @objc func deleteMenuClicked(_ menuItem: NSMenuItem) {
+        let alert = NSAlert.init()
+        alert.messageText = "Are you sure to delete it"
+        alert.addButton(withTitle: "Delete")
+        alert.addButton(withTitle: "Cancel")
+        let result = alert.runModal()
+        if result.rawValue != 1000 {
+            return
+        }
+        
+        let item = menuItem.representedObject
+        if item == nil {
+            return;
+        }
+        var toolSet: ToolSet?
+        if item is ToolItem {
+            let toolItem = item as! ToolItem
+            toolSet = toolItem.toolset
+        }else if item is ToolSet {
+            let thisItem = item as! ToolSet
+            toolSet = thisItem.parentSet
+        }
+        if toolSet != nil {
+            let index = self.outlineView.childIndex(forItem: item!)
+            if index >= 0 {
+                toolSet?.children.remove(at: index)
+                self.outlineView.reloadItem(toolSet, reloadChildren: true)
+                //delete local file
+                if item is ToolItem {
+                    let toolItem = item as! ToolItem
+                    ToolService.shared().doDeleteTool(toolItem)
+                }else if item is ToolSet {
+                    let toolset = item as! ToolSet
+                    ToolService.shared().doDeleteToolset(toolset)
+                }
+                //save sorted order
+                ToolService.shared().doSaveToolsetOrder(toolSet!)
+            }
         }
     }
     
@@ -263,6 +320,8 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             self.outlineView.deselectAll(nil)
             let toolIndex = self.outlineView.row(forItem: toolItem)
             self.outlineView.selectRowIndexes(IndexSet.init(integer: toolIndex), byExtendingSelection: false)
+            //save sorted order
+            ToolService.shared().doSaveToolsetOrder(toolset)
         }
         self.editDefaultLayout.isHidden = true
     }
@@ -301,6 +360,8 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             self.outlineView.deselectAll(nil)
             let setIndex = self.outlineView.row(forItem: toolset)
             self.outlineView.selectRowIndexes(IndexSet.init(integer: setIndex), byExtendingSelection: false)
+            //save sorted order
+            ToolService.shared().doSaveToolsetOrder(parentSet)
         }
         self.editDefaultLayout.isHidden = true
     }
@@ -316,39 +377,9 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         setEditAreaWidth(preferedEditAreaWidth())
         view.frame = self.editLayout.bounds
         addVC.completionCallback = { (toolset: ToolSet) -> Void in
-            self.outlineView.expandItem(toolset)
+            self.outlineView.reloadItem(toolset)
         }
         self.editDefaultLayout.isHidden = true
-    }
-    
-    func doSaveToolsetOrder(_ toolset: ToolSet) {
-        var configData: [String:Any]?
-        let configPath = toolset.configPath()
-        if let data = NSData.init(contentsOfFile: configPath) {
-            configData = try? JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.init(rawValue: 0)) as! [String:Any]
-        }
-        var sortList = [String].init()
-        for item in toolset.children {
-            if item is ToolItem {
-                let toolItem = item as! ToolItem
-                sortList.append(toolItem.fileName())
-            }else if item is ToolSet {
-                let toolSet = item as! ToolSet
-                sortList.append(toolSet.title)
-            }
-        }
-        if configData == nil {
-            configData = [String:Any].init()
-        }
-        configData!["sort"] = sortList
-        let fm = FileManager.default
-        if !fm.fileExists(atPath: configPath) {
-            fm.createFile(atPath: configPath, contents: nil, attributes: nil)
-        }
-        if let fileData = try? JSONSerialization.data(withJSONObject: configData!, options: JSONSerialization.WritingOptions.init(rawValue: 0)) {
-            let fileURL = URL.init(fileURLWithPath: configPath)
-            try? fileData.write(to: fileURL)
-        }
     }
     
     func resetEditArea() {

@@ -47,14 +47,20 @@ class MenuController: NSObject {
         if let toolSet = self.toolSet {
             //menu
             let menu = NSMenu.init()
-            let menuItem = NSMenuItem.init()
             statusItem.menu = menu
             self.menu = menu;
             traverseAddMenuItem(toolSet:toolSet, menu: menu)
-            menuItem.title = "Setting"
-            menuItem.target = self;
-            menuItem.action = #selector(MenuController.settingMenuSelected)
-            menu.addItem(menuItem)
+            //separator
+            if menu.items.count > 0 {
+                let lineItem = NSMenuItem.separator()
+                menu.addItem(lineItem)
+            }
+            //setting
+            let settingItem = NSMenuItem.init()
+            settingItem.title = "Setting"
+            settingItem.target = self;
+            settingItem.action = #selector(MenuController.settingMenuSelected)
+            menu.addItem(settingItem)
         }
     }
     

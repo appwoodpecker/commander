@@ -26,10 +26,10 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSHomeTemplate" id="bCe-8D-cEI"/>
                 </imageView>
-                <button toolTip="Reload Menu" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAh-6f-OIe">
+                <button toolTip="Update Menu Bar" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAh-6f-OIe">
                     <rect key="frame" x="229" y="0.0" width="24" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Ryl-L8-ZPk">
+                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSShareTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Ryl-L8-ZPk">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -49,6 +49,6 @@
     </objects>
     <resources>
         <image name="NSHomeTemplate" width="14" height="14"/>
-        <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
     </resources>
 </document>
