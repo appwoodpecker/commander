@@ -29,7 +29,7 @@ class MenuController: NSObject {
     func setup() {
         //setup status item
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.title = "CMD"
+        statusItem.button?.title = "🐶"
         self.statusItem = statusItem
         //
         loadContent()
@@ -61,6 +61,11 @@ class MenuController: NSObject {
             settingItem.target = self;
             settingItem.action = #selector(MenuController.settingMenuSelected)
             menu.addItem(settingItem)
+            let exitItem = NSMenuItem.init()
+            exitItem.title = "Quit"
+            exitItem.target = self;
+            exitItem.action = #selector(MenuController.quitMenuSelected)
+            menu.addItem(exitItem)
         }
     }
     
@@ -128,5 +133,11 @@ class MenuController: NSObject {
         self.window.title = "Setting"
         self.window.makeKeyAndOrderFront(nil)
     }
+    
+    @objc func quitMenuSelected() {
+        exit(1)
+    }
+    
+    
     
 }

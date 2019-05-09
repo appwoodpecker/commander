@@ -39,8 +39,29 @@ class Config: NSObject {
         return exe
     }
     
-    func workPath() -> String {
-        return"/Users/zhangxiaogang/Documents/GitHub/Commander/workspace"
+    func setupEnvt() {
+        let path = rootPath()
+        let fm = FileManager.default
+        let exists = fm.fileExists(atPath: path)
+        if !exists {
+            try? fm.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+            if let defaultPath = Bundle.main.path(forResource: "menubar", ofType: nil) {
+                try? fm.copyItem(atPath: defaultPath, toPath: workPath())
+            }
+        }
     }
+    
+    func rootPath() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let docPath = paths.first
+        let rootPath = docPath?.appendingPathComponent("Commander")
+        return rootPath!
+    }
+    
+    func workPath() -> String {
+        return rootPath().appendingPathComponent("menubar")
+    }
+    
+    
     
 }

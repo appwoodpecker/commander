@@ -15,14 +15,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var controller: MenuController!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
+        Config.shared().setupEnvt()
         let controller = MenuController.shared()
         controller.window = self.window;
         controller.setup()
         self.controller = controller;
     }
-    
-    
    
     
     func applicationWillTerminate(_ aNotification: Notification) {

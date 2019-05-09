@@ -119,8 +119,11 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         let row = self.outlineView.row(for: cell)
         let item = self.outlineView.item(atRow: row)
         if item is ToolSet {
-            let menu = NSMenu.init()
             let toolset = item as! ToolSet
+            if toolset.isRoot() {
+                return
+            }
+            let menu = NSMenu.init()
             //add tool
             let toolItem = NSMenuItem.init()
             toolItem.title = "Add Tool"
@@ -136,14 +139,12 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             setItem.action = #selector(SettingViewController.addToolsetMenuClicked(_:))
             menu.addItem(setItem)
             //edit
-            if !toolset.isRoot() {
-                let editItem = NSMenuItem.init()
-                editItem.title = "Edit"
-                editItem.representedObject = item
-                editItem.target = self
-                editItem.action = #selector(SettingViewController.editMenuClicked(_:))
-                menu.addItem(editItem)
-            }
+            let editItem = NSMenuItem.init()
+            editItem.title = "Edit"
+            editItem.representedObject = item
+            editItem.target = self
+            editItem.action = #selector(SettingViewController.editMenuClicked(_:))
+            menu.addItem(editItem)
             //move up
             let index = outlineView.childIndex(forItem: item!)
             if index > 0 {
@@ -155,14 +156,12 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
                 menu.addItem(upItem)
             }
             //remove
-            if !toolset.isRoot() {
-                let removeItem = NSMenuItem.init()
-                removeItem.title = "Delete"
-                removeItem.representedObject = item
-                removeItem.target = self
-                removeItem.action = #selector(SettingViewController.deleteMenuClicked(_:))
-                menu.addItem(removeItem)
-            }
+            let removeItem = NSMenuItem.init()
+            removeItem.title = "Delete"
+            removeItem.representedObject = item
+            removeItem.target = self
+            removeItem.action = #selector(SettingViewController.deleteMenuClicked(_:))
+            menu.addItem(removeItem)
             
             menu.popUp(positioning: nil, at: position, in: cell)
             
@@ -298,8 +297,52 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         }
     }
     
+    @objc func toggleAutorunMenuClicked(_ menuItem: NSMenuItem) {
+        AutorunUtil.toggleLaunchAtStartup()
+    }
+    
+    //refresh menubar
     func settingCellRefreshRequest(_ cell: SettingCellView) {
         MenuController.shared().reloadMenu()
+    }
+    
+    //home setting
+    func settingCellSettingRequest(_ cell: SettingCellView, position: NSPoint) {
+        let row = self.outlineView.row(for: cell)
+        let item = self.outlineView.item(atRow: row)
+        if item is ToolSet {
+            let toolset = item as! ToolSet
+            if !toolset.isRoot() {
+                return;
+            }
+            let menu = NSMenu.init()
+            //add tool
+            let toolItem = NSMenuItem.init()
+            toolItem.title = "Add Tool"
+            toolItem.representedObject = item
+            toolItem.target = self
+            toolItem.action = #selector(SettingViewController.addToolMenuClicked(_:))
+            menu.addItem(toolItem)
+            //add toolset
+            let setItem = NSMenuItem.init()
+            setItem.title = "Add Toolset"
+            setItem.representedObject = item
+            setItem.target = self
+            setItem.action = #selector(SettingViewController.addToolsetMenuClicked(_:))
+            menu.addItem(setItem)
+            //startup on computer launch
+            let autorun = AutorunUtil.applicationIsInStartUpItems()
+            if !autorun {
+                let launchItem = NSMenuItem.init()
+                launchItem.title = "Enable auto launch"
+                launchItem.representedObject = item
+                launchItem.target = self
+                launchItem.action = #selector(SettingViewController.toggleAutorunMenuClicked(_:))
+                menu.addItem(launchItem)
+            }
+            menu.popUp(positioning: nil, at: position, in: cell)
+        }
+        
     }
     
     //add tool

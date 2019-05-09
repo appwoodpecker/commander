@@ -13,7 +13,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-Ft-xiG">
-                    <rect key="frame" x="23" y="3" width="200" height="17"/>
+                    <rect key="frame" x="23" y="3" width="174" height="17"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="JCi-Vg-j6G">
                         <font key="font" metaFont="system"/>
@@ -37,10 +37,22 @@
                         <action selector="refreshButtonPressed:" target="pQT-yw-ovG" id="F8I-gg-Wut"/>
                     </connections>
                 </button>
+                <button toolTip="Setting" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cm-Pf-9Au">
+                    <rect key="frame" x="203" y="0.0" width="24" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSActionTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="vdg-Rg-6Nr">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="settingButtonPressed:" target="pQT-yw-ovG" id="sPk-FD-fde"/>
+                    </connections>
+                </button>
             </subviews>
             <connections>
                 <outlet property="iconImageView" destination="EnQ-1g-Oww" id="ZMs-a9-BC3"/>
                 <outlet property="refreshButton" destination="jAh-6f-OIe" id="PfS-EQ-2ZQ"/>
+                <outlet property="settingButton" destination="7cm-Pf-9Au" id="rtW-VP-w4M"/>
                 <outlet property="textField" destination="Mte-Ft-xiG" id="WSi-km-SrY"/>
                 <outlet property="titleLabel" destination="Mte-Ft-xiG" id="zjm-Bg-LU8"/>
             </connections>
@@ -48,6 +60,7 @@
         </tableCellView>
     </objects>
     <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSHomeTemplate" width="14" height="14"/>
         <image name="NSShareTemplate" width="11" height="16"/>
     </resources>
