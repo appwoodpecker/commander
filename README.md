@@ -1,7 +1,9 @@
-# Commander
-mac menubar app for script
+# commander
+Run your script with this mac menubar app
+
+![menubar](http://www.woodpeck.cn/res/img/cmd_menu.png)
 
 # Usage
 
-- Download released app, drag the Commander.app to your Application directory
-- Or build the project
+1. Download the released app, drag the Commander.app to your Application folder
+2. Add your tool or toolset, enjoy!
