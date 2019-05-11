@@ -284,6 +284,11 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         MenuController.shared().reloadMenu()
     }
     
+    @IBAction func homeButtonPressed(_ sender: Any) {
+        let path = Config.shared().workPath()
+        NSWorkspace.shared.openFile(path)
+    }
+    
     //add tool
     @objc func addToolMenuClicked(_ menuItem: NSMenuItem) {
         let item = menuItem.representedObject
@@ -444,6 +449,9 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             //save sorted order
             ToolService.shared().doSaveToolsetOrder(toolset)
         }
+        addVC.cancelCallback = {() -> Void in
+            self.resetEditArea()
+        }
         self.editDefaultLayout.isHidden = true
     }
     
@@ -460,6 +468,9 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         view.frame = self.editLayout.bounds
         addVC.completionCallback = {(toolItem: ToolItem) -> Void in
             self.outlineView.reloadItem(toolItem)
+            self.resetEditArea()
+        }
+        addVC.cancelCallback = {() -> Void in
             self.resetEditArea()
         }
         self.editDefaultLayout.isHidden = true
@@ -491,6 +502,9 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             //save sorted order
             ToolService.shared().doSaveToolsetOrder(parentSet)
         }
+        addVC.cancelCallback = {() -> Void in
+            self.resetEditArea()
+        }
         self.editDefaultLayout.isHidden = true
     }
     
@@ -509,7 +523,18 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             self.outlineView.reloadItem(toolset)
             self.resetEditArea()
         }
+        addVC.cancelCallback = {() -> Void in
+            self.resetEditArea()
+        }
         self.editDefaultLayout.isHidden = true
+    }
+    
+    
+    public func outlineViewSelectionDidChange(_ notification: Notification) {
+        let row = self.outlineView.selectedRow
+        if row < 0 {
+            resetEditArea()
+        }
     }
     
     func resetEditArea() {
@@ -540,5 +565,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
     func preferedEditAreaWidth() -> CGFloat {
         return 520
     }
+    
+    
     
 }

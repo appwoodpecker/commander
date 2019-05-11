@@ -19,11 +19,12 @@ class SettingCellView: BaseCellView {
         if item is ToolItem {
             let toolItem = item as! ToolItem
             self.titleLabel.stringValue = toolItem.title
-            self.iconImageView.image = NSImage.init(named: NSImage.applicationIconName)
+            self.iconImageView.image = NSImage.init(named: "tool")
         }else if item is ToolSet {
             let toolSet = item as! ToolSet
             self.titleLabel.stringValue = toolSet.title
             self.iconImageView.image = NSImage.init(named:NSImage.folderName);
+
         }
         self.item = item
     }

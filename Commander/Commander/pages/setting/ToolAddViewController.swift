@@ -21,6 +21,7 @@ class ToolAddViewController: NSViewController {
     //edit
     var toolitem: ToolItem?
     var completionCallback: ((ToolItem) -> Void)?
+    var cancelCallback: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,5 +136,12 @@ class ToolAddViewController: NSViewController {
             }
         }
     }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        if let callback = self.cancelCallback {
+            callback()
+        }
+    }
+    
     
 }

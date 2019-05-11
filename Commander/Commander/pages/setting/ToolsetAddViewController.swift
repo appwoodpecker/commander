@@ -18,6 +18,7 @@ class ToolsetAddViewController: NSViewController {
     //edit
     var toolSet: ToolSet?
     var completionCallback: ((ToolSet) -> Void)?
+    var cancelCallback: (() -> Void)?
     var iconURL: URL?
     
     override func viewDidLoad() {
@@ -124,4 +125,11 @@ class ToolsetAddViewController: NSViewController {
             }
         }
     }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        if let callback = self.cancelCallback {
+            callback()
+        }
+    }
+    
 }

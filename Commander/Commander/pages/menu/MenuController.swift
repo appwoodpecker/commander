@@ -29,7 +29,11 @@ class MenuController: NSObject {
     func setup() {
         //setup status item
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.title = "🐈"
+        if let image = NSImage.init(named: "menu") {
+            image.isTemplate = true
+            statusItem.button?.image = image
+        }
+//        statusItem.button?.title = "🐈"
         self.statusItem = statusItem
         loadContent()
     }

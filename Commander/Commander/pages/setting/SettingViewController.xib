@@ -78,15 +78,20 @@
                                     <rect key="frame" x="0.0" y="497" width="278" height="28"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <subviews>
-                                        <button toolTip="Update Menu Bar" verticalHuggingPriority="750" id="Ea1-wt-mPh">
-                                            <rect key="frame" x="244" y="2" width="24" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSShareTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="FXv-lw-plp">
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7Qy-Wb-aOp">
+                                            <rect key="frame" x="8" y="7" width="19" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSHomeTemplate" id="7Ab-NI-6lM"/>
+                                        </imageView>
+                                        <button verticalHuggingPriority="750" id="MDs-nz-ii0">
+                                            <rect key="frame" x="0.0" y="2" width="43" height="26"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="uot-SC-Lee">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="reloadActionButtonPressed:" target="-2" id="EGM-10-B6k"/>
+                                                <action selector="homeButtonPressed:" target="-2" id="9fb-cN-egB"/>
                                             </connections>
                                         </button>
                                         <button toolTip="Setting" verticalHuggingPriority="750" id="Gn4-2Z-lOp">
@@ -100,13 +105,19 @@
                                                 <action selector="settingButtonPressed:" target="-2" id="2qA-YC-lBV"/>
                                             </connections>
                                         </button>
+                                        <button toolTip="Update Menu Bar" verticalHuggingPriority="750" id="Ea1-wt-mPh">
+                                            <rect key="frame" x="244" y="2" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSShareTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="FXv-lw-plp">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="reloadActionButtonPressed:" target="-2" id="EGM-10-B6k"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </customView>
-                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7Qy-Wb-aOp">
-                                    <rect key="frame" x="12" y="504" width="14" height="14"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSHomeTemplate" id="7Ab-NI-6lM"/>
-                                </imageView>
                             </subviews>
                         </customView>
                         <customView id="J1T-fZ-tQp">
