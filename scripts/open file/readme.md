@@ -1,7 +1,11 @@
-open file with application
-
-1. open with specified application 
+- open file with application
 
 ```
-	open -a "Terminal" ~/Desktop/demo.txt
+open ~/Desktop
+```
+
+- open file with specified application
+
+```
+open -a "Terminal" ~/Desktop/demo.txt
 ```
