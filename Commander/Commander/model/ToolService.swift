@@ -43,13 +43,26 @@ class ToolService: NSObject {
             if attributes == nil {
                 continue;
             }
-             let type: String = attributes![FileAttributeKey.type] as! String
+            let type: String = attributes![FileAttributeKey.type] as! String
             if(type == FileAttributeType.typeDirectory.rawValue) {
                 if name.hasSuffix("bundle") {
-                    ///item
+                    //tool or app
                     var title: String?
                     var scriptFile: String?
-                    var path: String?
+                    var appId: String?
+                    
+                    let appFilename = "app.json"
+                    let appPath = itemPath.appendingPathComponent(appFilename)
+                    if fm.fileExists(atPath: appPath) {
+                        do {
+                            let infoText = try String.init(contentsOfFile: appPath)
+                            if let appInfo = infoText.jsonObject() {
+                                appId = appInfo["id"] as? String
+                            }
+                        }catch {
+                            
+                        }
+                    }
                     //title
                     title = name.replacingOccurrences(of: ".bundle", with: "")
                     //script
@@ -67,12 +80,11 @@ class ToolService: NSObject {
                     if scriptFileName != nil {
                         scriptFile = scriptFileName
                     }
-                    //path
-                    path = parentSet.path.appendingPathComponent(name)
-                    if title != nil && scriptFileName != nil && path != nil {
+                    if title != nil && (scriptFileName != nil || appId != nil) {
                         let toolItem = ToolItem.init()
                         toolItem.title = title
                         toolItem.scriptFile = scriptFile
+                        toolItem.appId = appId
                         parentSet.children!.append(toolItem)
                         toolItem.toolset = parentSet
                     }
@@ -284,5 +296,43 @@ class ToolService: NSObject {
             try? fileData.write(to: fileURL)
         }
     }
+    
+    //add app
+    func doAddApp(title: String, appId: String, iconURL:URL?, parent: ToolSet) -> ToolItem? {
+        let groupPath = parent.absolutePath()
+        let groupURL = URL.init(fileURLWithPath: groupPath)
+        
+        ///everything is okay, now let's create it
+        //1.tool bundle
+        let bundleName = title + ".bundle"
+        let bundleURL = groupURL.appendingPathComponent(bundleName)
+        let fm = FileManager.default
+        try? fm.createDirectory(at: bundleURL, withIntermediateDirectories: true, attributes: nil)
+        //2.save app
+        let appFilename = "app.json"
+        let appURL = bundleURL.appendingPathComponent(appFilename)
+        let appPath = appURL.path
+        let appInfo = ["id":appId]
+        if let infoText = appInfo.jsonText() {
+            let data = infoText.data(using: String.Encoding.utf8)
+            let result = fm.createFile(atPath: appPath, contents: data, attributes: nil)
+            if !result {
+                return nil;
+            }
+        }
+        
+        //3.icon
+        if let iconFileURL = iconURL {
+            let targetURL = bundleURL.appendingPathComponent("icon.png")
+            try? fm.copyItem(at: iconFileURL, to: targetURL)
+        }
+        let toolItem = ToolItem.init()
+        toolItem.title = title
+        toolItem.appId = appId
+        toolItem.toolset = parent
+        parent.children.append(toolItem)
+        return toolItem
+    }
+    
     
 }

@@ -143,6 +143,13 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         toolItem.target = self
         toolItem.action = #selector(SettingViewController.addToolMenuClicked(_:))
         menu.addItem(toolItem)
+        //add app tool
+        let appItem = NSMenuItem.init()
+        appItem.title = "Add App"
+        appItem.representedObject = toolset
+        appItem.target = self
+        appItem.action = #selector(SettingViewController.addAppMenuClicked(_:))
+        menu.addItem(appItem)
         //add toolset
         let setItem = NSMenuItem.init()
         setItem.title = "Add Toolset"
@@ -232,6 +239,13 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             toolItem.target = self
             toolItem.action = #selector(SettingViewController.addToolMenuClicked(_:))
             menu.addItem(toolItem)
+            //add app tool
+            let appItem = NSMenuItem.init()
+            appItem.title = "Add App"
+            appItem.representedObject = toolset
+            appItem.target = self
+            appItem.action = #selector(SettingViewController.addAppMenuClicked(_:))
+            menu.addItem(appItem)
             //add toolset
             let setItem = NSMenuItem.init()
             setItem.title = "Add Toolset"
@@ -297,6 +311,17 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         }
         if item is ToolSet {
             doAddTool(item as! ToolSet)
+        }
+    }
+    
+    //add app
+    @objc func addAppMenuClicked(_ menuItem: NSMenuItem) {
+        let item = menuItem.representedObject
+        if item == nil {
+            return;
+        }
+        if item is ToolSet {
+            doAddApp(item as! ToolSet)
         }
     }
     
@@ -459,6 +484,59 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
     func doEditTool(_ toolItem: ToolItem) {
         resetEditArea()
         let addVC = ToolAddViewController.init(nibName: "ToolAddViewController", bundle: nil)
+        addVC.toolitem = toolItem
+        self.editVC = addVC
+        let view = addVC.view
+        self.editLayout.addSubview(view)
+        self.editView = view
+        setEditAreaWidth(preferedEditAreaWidth())
+        view.frame = self.editLayout.bounds
+        addVC.completionCallback = {(toolItem: ToolItem) -> Void in
+            self.outlineView.reloadItem(toolItem)
+            self.resetEditArea()
+        }
+        addVC.cancelCallback = {() -> Void in
+            self.resetEditArea()
+        }
+        self.editDefaultLayout.isHidden = true
+    }
+    
+    //add app
+    func doAddApp(_ toolset: ToolSet) {
+        resetEditArea()
+        let addVC = AppAddViewController.init(nibName: "AppAddViewController", bundle: nil)
+        addVC.toolset = toolset
+        self.editVC = addVC
+        let view = addVC.view
+        self.editLayout.addSubview(view)
+        self.editView = view
+        setEditAreaWidth(preferedEditAreaWidth())
+        view.frame = self.editLayout.bounds
+        addVC.completionCallback = {(toolItem: ToolItem) -> Void in
+            if(toolset.isRoot()) {
+                self.outlineView.reloadItem(nil, reloadChildren: true)
+                self.outlineView.expandItem(nil)
+            }else {
+                self.outlineView.reloadItem(toolset, reloadChildren: true)
+                self.outlineView.expandItem(toolset)
+            }
+            self.resetEditArea()
+            self.outlineView.deselectAll(nil)
+            let toolIndex = self.outlineView.row(forItem: toolItem)
+            self.outlineView.selectRowIndexes(IndexSet.init(integer: toolIndex), byExtendingSelection: false)
+            //save sorted order
+            ToolService.shared().doSaveToolsetOrder(toolset)
+        }
+        addVC.cancelCallback = {() -> Void in
+            self.resetEditArea()
+        }
+        self.editDefaultLayout.isHidden = true
+    }
+    
+    //edit app
+    func doEditApp(_ toolItem: ToolItem) {
+        resetEditArea()
+        let addVC = AppAddViewController.init(nibName: "AppAddViewController", bundle: nil)
         addVC.toolitem = toolItem
         self.editVC = addVC
         let view = addVC.view

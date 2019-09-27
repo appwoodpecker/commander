@@ -11,7 +11,8 @@ import Cocoa
 class ToolItem: NSObject {
     
     var title: String!
-    var scriptFile: String!
+    var scriptFile: String?
+    var appId: String?
     var toolset: ToolSet!
     
     func fileName() -> String {
@@ -23,11 +24,15 @@ class ToolItem: NSObject {
     }
     
     func scriptPath() -> String {
-        return path().appendingPathComponent(scriptFile)
+        return path().appendingPathComponent(scriptFile!)
     }
     
     func iconPath() -> String {
         return path().appendingPathComponent("icon.png")
+    }
+    
+    func isApp() -> Bool {
+        return appId != nil
     }
     
 }

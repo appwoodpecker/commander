@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B7AA3FA233CA4F400F723A9 /* QRInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7AA3F8233CA4F400F723A9 /* QRInputViewController.swift */; };
+		1B7AA3FB233CA4F400F723A9 /* QRInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7AA3F9233CA4F400F723A9 /* QRInputViewController.xib */; };
+		1B7AA3FE233CA50E00F723A9 /* QROutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7AA3FC233CA50E00F723A9 /* QROutputViewController.swift */; };
+		1B7AA3FF233CA50E00F723A9 /* QROutputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7AA3FD233CA50E00F723A9 /* QROutputViewController.xib */; };
+		1B7AA401233CAD7200F723A9 /* QRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7AA400233CAD7200F723A9 /* QRApp.swift */; };
+		1B7AA403233CAE2900F723A9 /* AppItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7AA402233CAE2900F723A9 /* AppItem.swift */; };
+		1B7AA406233CBC6700F723A9 /* AppAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7AA404233CBC6700F723A9 /* AppAddViewController.swift */; };
+		1B7AA407233CBC6700F723A9 /* AppAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7AA405233CBC6700F723A9 /* AppAddViewController.xib */; };
 		1BB39348228128FA00E09525 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB39346228128FA00E09525 /* SettingViewController.swift */; };
 		1BB39349228128FA00E09525 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB39347228128FA00E09525 /* SettingViewController.xib */; };
 		1BB3934C228129F300E09525 /* SettingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB3934B228129F300E09525 /* SettingCellView.swift */; };
@@ -31,6 +39,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B7AA3F8233CA4F400F723A9 /* QRInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRInputViewController.swift; sourceTree = "<group>"; };
+		1B7AA3F9233CA4F400F723A9 /* QRInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRInputViewController.xib; sourceTree = "<group>"; };
+		1B7AA3FC233CA50E00F723A9 /* QROutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QROutputViewController.swift; sourceTree = "<group>"; };
+		1B7AA3FD233CA50E00F723A9 /* QROutputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QROutputViewController.xib; sourceTree = "<group>"; };
+		1B7AA400233CAD7200F723A9 /* QRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRApp.swift; sourceTree = "<group>"; };
+		1B7AA402233CAE2900F723A9 /* AppItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppItem.swift; sourceTree = "<group>"; };
+		1B7AA404233CBC6700F723A9 /* AppAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAddViewController.swift; sourceTree = "<group>"; };
+		1B7AA405233CBC6700F723A9 /* AppAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppAddViewController.xib; sourceTree = "<group>"; };
 		1BB39346228128FA00E09525 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		1BB39347228128FA00E09525 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		1BB3934B228129F300E09525 /* SettingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellView.swift; sourceTree = "<group>"; };
@@ -68,6 +84,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B7AA3F6233CA3B200F723A9 /* apps */ = {
+			isa = PBXGroup;
+			children = (
+				1B7AA3F7233CA49300F723A9 /* text2qr */,
+			);
+			path = apps;
+			sourceTree = "<group>";
+		};
+		1B7AA3F7233CA49300F723A9 /* text2qr */ = {
+			isa = PBXGroup;
+			children = (
+				1B7AA400233CAD7200F723A9 /* QRApp.swift */,
+				1B7AA3F8233CA4F400F723A9 /* QRInputViewController.swift */,
+				1B7AA3F9233CA4F400F723A9 /* QRInputViewController.xib */,
+				1B7AA3FC233CA50E00F723A9 /* QROutputViewController.swift */,
+				1B7AA3FD233CA50E00F723A9 /* QROutputViewController.xib */,
+			);
+			path = text2qr;
+			sourceTree = "<group>";
+		};
 		1BB3934A228129D700E09525 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +163,7 @@
 				1BB62944227FE383005B1295 /* components */,
 				1F052687227FA9ED003D84C1 /* model */,
 				1BB6293E227ED521005B1295 /* pages */,
+				1B7AA3F6233CA3B200F723A9 /* apps */,
 				1BB62932227EC745005B1295 /* Assets.xcassets */,
 				1BB62930227EC742005B1295 /* AppDelegate.swift */,
 				1BB62934227EC745005B1295 /* MainMenu.xib */,
@@ -180,6 +217,8 @@
 				1F05268F2281C853003D84C1 /* ToolsetAddViewController.xib */,
 				1BB39346228128FA00E09525 /* SettingViewController.swift */,
 				1BB39347228128FA00E09525 /* SettingViewController.xib */,
+				1B7AA404233CBC6700F723A9 /* AppAddViewController.swift */,
+				1B7AA405233CBC6700F723A9 /* AppAddViewController.xib */,
 			);
 			path = setting;
 			sourceTree = "<group>";
@@ -190,6 +229,7 @@
 				1F052688227FAADA003D84C1 /* ToolItem.swift */,
 				1F05268A227FAC55003D84C1 /* ToolSet.swift */,
 				1F05268C227FACB8003D84C1 /* ToolService.swift */,
+				1B7AA402233CAE2900F723A9 /* AppItem.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -258,11 +298,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BB62933227EC745005B1295 /* Assets.xcassets in Resources */,
+				1B7AA3FF233CA50E00F723A9 /* QROutputViewController.xib in Resources */,
 				1F0526912281C853003D84C1 /* ToolsetAddViewController.xib in Resources */,
 				1F05267E227F1EFF003D84C1 /* ToolAddViewController.xib in Resources */,
 				1BB393AF2283F78F00E09525 /* menubar in Resources */,
+				1B7AA3FB233CA4F400F723A9 /* QRInputViewController.xib in Resources */,
 				1BB62936227EC745005B1295 /* MainMenu.xib in Resources */,
 				1BB3934E22812A0300E09525 /* SettingCellView.xib in Resources */,
+				1B7AA407233CBC6700F723A9 /* AppAddViewController.xib in Resources */,
 				1BB39349228128FA00E09525 /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,10 +322,15 @@
 				1F05268B227FAC55003D84C1 /* ToolSet.swift in Sources */,
 				1F05268D227FACB8003D84C1 /* ToolService.swift in Sources */,
 				1BB6294D22801D75005B1295 /* Extension.swift in Sources */,
+				1B7AA401233CAD7200F723A9 /* QRApp.swift in Sources */,
 				1BB39354228293B100E09525 /* BaseCellView.swift in Sources */,
 				1BB3934C228129F300E09525 /* SettingCellView.swift in Sources */,
+				1B7AA406233CBC6700F723A9 /* AppAddViewController.swift in Sources */,
+				1B7AA3FA233CA4F400F723A9 /* QRInputViewController.swift in Sources */,
 				1BB39348228128FA00E09525 /* SettingViewController.swift in Sources */,
 				1BB393AC2283D25800E09525 /* AutorunUtil.swift in Sources */,
+				1B7AA3FE233CA50E00F723A9 /* QROutputViewController.swift in Sources */,
+				1B7AA403233CAE2900F723A9 /* AppItem.swift in Sources */,
 				1BB393522282939900E09525 /* BaseOutlineView.swift in Sources */,
 				1BB62931227EC742005B1295 /* AppDelegate.swift in Sources */,
 				1F0526902281C853003D84C1 /* ToolsetAddViewController.swift in Sources */,
@@ -426,6 +474,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Commander/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -444,6 +496,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Commander/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,7 +1,8 @@
 - open file with application
 
 ```
-open ~/Desktop
+#open hosts file
+open /etc/hosts
 ```
 
 - open file with specified application

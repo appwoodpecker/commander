@@ -34,6 +34,34 @@ extension String {
         }
         return ext
     }
+    
+    func jsonObject() -> [String: Any]? {
+        var dict :[String: Any]?
+        if let data = self.data(using: String.Encoding.utf8) {
+            do {
+                let result = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.init(rawValue: 0))
+                if result is [String: Any] {
+                    dict = result as? [String : Any]
+                }
+            }catch {
+                
+            }
+        }
+        return dict
+    }
+}
+
+extension Dictionary {
+    func jsonText() -> String? {
+        var text : String?
+        do {
+            let data = try JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.init(rawValue: 0))
+            text = String.init(data: data, encoding: String.Encoding.utf8)
+        }catch {
+            print(error)
+        }
+        return text
+    }
 }
 
 extension NSImage {

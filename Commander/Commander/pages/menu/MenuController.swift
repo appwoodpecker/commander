@@ -26,6 +26,12 @@ class MenuController: NSObject {
         return sharedInstance
     }
     
+    func disimss() -> Void {
+        if let menu = self.statusItem.menu {
+            menu.cancelTracking()
+        }
+    }
+    
     func setup() {
         //setup status item
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -91,16 +97,23 @@ class MenuController: NSObject {
     
     func menuItemWithTool(_ toolItem :ToolItem) -> NSMenuItem {
         let menuItem = NSMenuItem.init()
-        menuItem.title = toolItem.title
-        let iconPath = toolItem.iconPath()
-        if let image = NSImage.init(contentsOfFile: iconPath) {
-            let roundImage = image.roundImage()
-            roundImage.size = NSMakeSize(16, 16)
-            menuItem.image = roundImage
+        if toolItem.isApp() {
+            let page = QRInputViewController.init()
+            let view = page.view
+            menuItem.view = view
+            menuItem.representedObject = page
+        }else {
+            menuItem.title = toolItem.title
+            let iconPath = toolItem.iconPath()
+            if let image = NSImage.init(contentsOfFile: iconPath) {
+                let roundImage = image.roundImage()
+                roundImage.size = NSMakeSize(16, 16)
+                menuItem.image = roundImage
+            }
+            menuItem.representedObject = toolItem
+            menuItem.target = self
+            menuItem.action = #selector(MenuController.toolMenuSelected(menuItem:))
         }
-        menuItem.representedObject = toolItem
-        menuItem.target = self
-        menuItem.action = #selector(MenuController.toolMenuSelected(menuItem:))
         return menuItem
     }
     

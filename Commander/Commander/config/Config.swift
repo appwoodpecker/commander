@@ -62,6 +62,12 @@ class Config: NSObject {
         return rootPath().appendingPathComponent("menubar")
     }
     
+    func getAppList() -> [String] {
+        return ["QRApp"]
+    }
     
+    func defaultPackage() -> String {
+        return "Commander"
+    }
     
 }
