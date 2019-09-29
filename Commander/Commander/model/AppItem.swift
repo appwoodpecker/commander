@@ -9,15 +9,17 @@
 import Cocoa
 
 class AppItem: NSObject {
+    
+    required override init() {
+        super.init()
+    }
+    
     class func name() -> String {
         return ""
     }
     
-    class func inputView() -> String {
-        return ""
+    func run() -> Void {
+        
     }
     
-    class func ouputView() -> String {
-        return ""
-    }
 }

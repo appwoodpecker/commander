@@ -96,7 +96,12 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         let row = self.outlineView.row(for: cell)
         let item = self.outlineView.item(atRow: row)
         if item is ToolItem {
-            doEditTool(item as! ToolItem)
+            let toolItem = item as! ToolItem
+            if toolItem.isApp() {
+                doEditApp(toolItem)
+            }else {
+                doEditTool(toolItem)
+            }
         }else if item is ToolSet {
             let toolset = item as! ToolSet
             if !toolset.isRoot() {
@@ -375,7 +380,11 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         }
         if item is ToolItem {
             let toolItem = item as! ToolItem
-            doEditTool(toolItem)
+            if toolItem.isApp() {
+                doEditApp(toolItem)
+            }else {
+                doEditTool(toolItem)
+            }
         }else if item is ToolSet {
             let toolSet = item as! ToolSet
             doEditToolset(toolSet)
@@ -537,7 +546,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
     func doEditApp(_ toolItem: ToolItem) {
         resetEditArea()
         let addVC = AppAddViewController.init(nibName: "AppAddViewController", bundle: nil)
-        addVC.toolitem = toolItem
+        addVC.toolItem = toolItem
         self.editVC = addVC
         let view = addVC.view
         self.editLayout.addSubview(view)

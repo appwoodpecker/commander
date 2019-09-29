@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B7AA3FA233CA4F400F723A9 /* QRInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7AA3F8233CA4F400F723A9 /* QRInputViewController.swift */; };
-		1B7AA3FB233CA4F400F723A9 /* QRInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7AA3F9233CA4F400F723A9 /* QRInputViewController.xib */; };
 		1B7AA3FE233CA50E00F723A9 /* QROutputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7AA3FC233CA50E00F723A9 /* QROutputViewController.swift */; };
 		1B7AA3FF233CA50E00F723A9 /* QROutputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7AA3FD233CA50E00F723A9 /* QROutputViewController.xib */; };
 		1B7AA401233CAD7200F723A9 /* QRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7AA400233CAD7200F723A9 /* QRApp.swift */; };
@@ -39,8 +37,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1B7AA3F8233CA4F400F723A9 /* QRInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRInputViewController.swift; sourceTree = "<group>"; };
-		1B7AA3F9233CA4F400F723A9 /* QRInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRInputViewController.xib; sourceTree = "<group>"; };
 		1B7AA3FC233CA50E00F723A9 /* QROutputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QROutputViewController.swift; sourceTree = "<group>"; };
 		1B7AA3FD233CA50E00F723A9 /* QROutputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QROutputViewController.xib; sourceTree = "<group>"; };
 		1B7AA400233CAD7200F723A9 /* QRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRApp.swift; sourceTree = "<group>"; };
@@ -96,8 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				1B7AA400233CAD7200F723A9 /* QRApp.swift */,
-				1B7AA3F8233CA4F400F723A9 /* QRInputViewController.swift */,
-				1B7AA3F9233CA4F400F723A9 /* QRInputViewController.xib */,
 				1B7AA3FC233CA50E00F723A9 /* QROutputViewController.swift */,
 				1B7AA3FD233CA50E00F723A9 /* QROutputViewController.xib */,
 			);
@@ -302,7 +296,6 @@
 				1F0526912281C853003D84C1 /* ToolsetAddViewController.xib in Resources */,
 				1F05267E227F1EFF003D84C1 /* ToolAddViewController.xib in Resources */,
 				1BB393AF2283F78F00E09525 /* menubar in Resources */,
-				1B7AA3FB233CA4F400F723A9 /* QRInputViewController.xib in Resources */,
 				1BB62936227EC745005B1295 /* MainMenu.xib in Resources */,
 				1BB3934E22812A0300E09525 /* SettingCellView.xib in Resources */,
 				1B7AA407233CBC6700F723A9 /* AppAddViewController.xib in Resources */,
@@ -326,7 +319,6 @@
 				1BB39354228293B100E09525 /* BaseCellView.swift in Sources */,
 				1BB3934C228129F300E09525 /* SettingCellView.swift in Sources */,
 				1B7AA406233CBC6700F723A9 /* AppAddViewController.swift in Sources */,
-				1B7AA3FA233CA4F400F723A9 /* QRInputViewController.swift in Sources */,
 				1BB39348228128FA00E09525 /* SettingViewController.swift in Sources */,
 				1BB393AC2283D25800E09525 /* AutorunUtil.swift in Sources */,
 				1B7AA3FE233CA50E00F723A9 /* QROutputViewController.swift in Sources */,

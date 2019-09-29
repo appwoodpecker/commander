@@ -97,23 +97,16 @@ class MenuController: NSObject {
     
     func menuItemWithTool(_ toolItem :ToolItem) -> NSMenuItem {
         let menuItem = NSMenuItem.init()
-        if toolItem.isApp() {
-            let page = QRInputViewController.init()
-            let view = page.view
-            menuItem.view = view
-            menuItem.representedObject = page
-        }else {
-            menuItem.title = toolItem.title
-            let iconPath = toolItem.iconPath()
-            if let image = NSImage.init(contentsOfFile: iconPath) {
-                let roundImage = image.roundImage()
-                roundImage.size = NSMakeSize(16, 16)
-                menuItem.image = roundImage
-            }
-            menuItem.representedObject = toolItem
-            menuItem.target = self
-            menuItem.action = #selector(MenuController.toolMenuSelected(menuItem:))
+        menuItem.title = toolItem.title
+        let iconPath = toolItem.iconPath()
+        if let image = NSImage.init(contentsOfFile: iconPath) {
+            let roundImage = image.roundImage()
+            roundImage.size = NSMakeSize(16, 16)
+            menuItem.image = roundImage
         }
+        menuItem.representedObject = toolItem
+        menuItem.target = self
+        menuItem.action = #selector(MenuController.toolMenuSelected(menuItem:))
         return menuItem
     }
     
@@ -133,13 +126,21 @@ class MenuController: NSObject {
     
     @objc func toolMenuSelected(menuItem: NSMenuItem) {
         let toolItem = menuItem.representedObject as! ToolItem
-        let scriptPath = toolItem.scriptPath()
-        let exe = Config.shared().exeForScriptFile(scriptPath)
-        if let exePath = exe {
-            let task = Process.init()
-            task.launchPath = exePath
-            task.arguments = [scriptPath]
-            task.launch()
+        if toolItem.isApp() {
+            let appId = toolItem.appId!
+            let className = Config.shared().defaultPackage() + "." + appId;
+            let clazz = NSClassFromString(className) as! AppItem.Type
+            let appObj = clazz.init()
+            appObj.run()
+        }else {
+            let scriptPath = toolItem.scriptPath()
+            let exe = Config.shared().exeForScriptFile(scriptPath)
+            if let exePath = exe {
+                let task = Process.init()
+                task.launchPath = exePath
+                task.arguments = [scriptPath]
+                task.launch()
+            }
         }
     }
     

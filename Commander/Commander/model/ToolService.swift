@@ -334,5 +334,35 @@ class ToolService: NSObject {
         return toolItem
     }
     
+    //edit app
+    func doEditApp(title: String, appId: String, iconURL:URL?, toolItem: ToolItem) {
+        let setURL = toolItem.toolset.absoluteURL()
+        let newFileName = title + ".bundle"
+        let fm = FileManager.default
+        //1.name
+        if toolItem.title != title {
+            let oldURL = setURL.appendingPathComponent(toolItem.fileName())
+            let newURL = setURL.appendingPathComponent(newFileName)
+            try? fm.moveItem(at: oldURL, to: newURL)
+            toolItem.title = title
+        }
+        let bundleURL = toolItem.toolset.absoluteURL().appendingPathComponent(newFileName)
+        //2.app
+        let appFilename = "app.json"
+        let appURL = bundleURL.appendingPathComponent(appFilename)
+        let appPath = appURL.path
+        let appInfo = ["id":appId]
+        if let infoText = appInfo.jsonText() {
+            let data = infoText.data(using: String.Encoding.utf8)
+            fm.createFile(atPath: appPath, contents: data, attributes: nil)
+        }
+        //3.icon
+        if let iconFileURL = iconURL {
+            let targetURL = bundleURL.appendingPathComponent("icon.png")
+            //remove old icon
+            try? fm.removeItem(at: targetURL)
+            try? fm.copyItem(at: iconFileURL, to: targetURL)
+        }
+    }
     
 }

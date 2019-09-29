@@ -10,18 +10,22 @@ import Cocoa
 
 class QRApp: AppItem {
     
-    override
-    class func name() -> String {
-        return "Text to qrcode"
+    override class func name() -> String {
+        return "Pasteboard QRCode"
     }
     
-    override
-    class func inputView() -> String {
-        return "QRInputViewController"
+    override func run() -> Void {
+        if let text = NSPasteboard.general.string(forType: NSPasteboard.PasteboardType.string) {
+            MenuController.shared().disimss()
+            let resultPage = QROutputViewController.init(nibName: "QROutputViewController", bundle: nil)
+            resultPage.text = text
+            if let window = MenuController.shared().window {
+                window.contentViewController = resultPage
+                window.title = ""
+                window.makeKeyAndOrderFront(nil)
+                window.orderFrontRegardless()
+            }
+        }
     }
     
-    override
-    class func ouputView() -> String {
-        return "QROutputViewController"
-    }
 }
