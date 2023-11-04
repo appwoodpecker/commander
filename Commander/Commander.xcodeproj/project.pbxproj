@@ -19,7 +19,6 @@
 		1BB3934E22812A0300E09525 /* SettingCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BB3934D22812A0300E09525 /* SettingCellView.xib */; };
 		1BB393522282939900E09525 /* BaseOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB393512282939900E09525 /* BaseOutlineView.swift */; };
 		1BB39354228293B100E09525 /* BaseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB39353228293B100E09525 /* BaseCellView.swift */; };
-		1BB393AC2283D25800E09525 /* AutorunUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB393AB2283D25800E09525 /* AutorunUtil.swift */; };
 		1BB393AF2283F78F00E09525 /* menubar in Resources */ = {isa = PBXBuildFile; fileRef = 1BB393AE2283F78F00E09525 /* menubar */; };
 		1BB62931227EC742005B1295 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB62930227EC742005B1295 /* AppDelegate.swift */; };
 		1BB62933227EC745005B1295 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB62932227EC745005B1295 /* Assets.xcassets */; };
@@ -49,7 +48,6 @@
 		1BB3934D22812A0300E09525 /* SettingCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCellView.xib; sourceTree = "<group>"; };
 		1BB393512282939900E09525 /* BaseOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseOutlineView.swift; sourceTree = "<group>"; };
 		1BB39353228293B100E09525 /* BaseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellView.swift; sourceTree = "<group>"; };
-		1BB393AB2283D25800E09525 /* AutorunUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorunUtil.swift; sourceTree = "<group>"; };
 		1BB393AE2283F78F00E09525 /* menubar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = menubar; sourceTree = "<group>"; };
 		1BB6292D227EC742005B1295 /* Commander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Commander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB62930227EC742005B1295 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,14 +115,6 @@
 			path = common;
 			sourceTree = "<group>";
 		};
-		1BB393A82283D17E00E09525 /* autorun */ = {
-			isa = PBXGroup;
-			children = (
-				1BB393AB2283D25800E09525 /* AutorunUtil.swift */,
-			);
-			path = autorun;
-			sourceTree = "<group>";
-		};
 		1BB393AD2283F78100E09525 /* resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +177,6 @@
 		1BB62944227FE383005B1295 /* components */ = {
 			isa = PBXGroup;
 			children = (
-				1BB393A82283D17E00E09525 /* autorun */,
 				1BB393A72283D15500E09525 /* common */,
 			);
 			path = components;
@@ -260,6 +249,7 @@
 				TargetAttributes = {
 					1BB6292C227EC742005B1295 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = "";
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 0;
@@ -320,7 +310,6 @@
 				1BB3934C228129F300E09525 /* SettingCellView.swift in Sources */,
 				1B7AA406233CBC6700F723A9 /* AppAddViewController.swift in Sources */,
 				1BB39348228128FA00E09525 /* SettingViewController.swift in Sources */,
-				1BB393AC2283D25800E09525 /* AutorunUtil.swift in Sources */,
 				1B7AA3FE233CA50E00F723A9 /* QROutputViewController.swift in Sources */,
 				1B7AA403233CAE2900F723A9 /* AppItem.swift in Sources */,
 				1BB393522282939900E09525 /* BaseOutlineView.swift in Sources */,

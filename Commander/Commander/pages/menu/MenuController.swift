@@ -100,9 +100,8 @@ class MenuController: NSObject {
         menuItem.title = toolItem.title
         let iconPath = toolItem.iconPath()
         if let image = NSImage.init(contentsOfFile: iconPath) {
-            let roundImage = image.roundImage()
-            roundImage.size = NSMakeSize(16, 16)
-            menuItem.image = roundImage
+            image.size = NSMakeSize(16, 16)
+            menuItem.image = image
         }
         menuItem.representedObject = toolItem
         menuItem.target = self

@@ -19,7 +19,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
     @IBOutlet weak var editLayout: NSView!
     @IBOutlet weak var editDefaultLayout: NSTextField!
     
-    @IBOutlet weak var settingButton: NSButton!
+    @IBOutlet weak var addButton: NSButton!
     
     
     var editVC: AnyObject?
@@ -127,13 +127,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
     }
     
     func cellRightClicked(_ cell: BaseCellView, position: NSPoint) {
-        let row = self.outlineView.row(for: cell)
-        let item = self.outlineView.item(atRow: row)
-        if item is ToolSet {
-            doActionWithToolset(item as! ToolSet,sender: cell, point: position)
-        }else if item is ToolItem {
-            doActionWithTool(item as! ToolItem, sender: cell, point: position)
-        }
+        
     }
     
     func doActionWithToolset(_ toolset: ToolSet, sender: NSView, point: NSPoint) {
@@ -251,61 +245,25 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             appItem.target = self
             appItem.action = #selector(SettingViewController.addAppMenuClicked(_:))
             menu.addItem(appItem)
-            //add toolset
+            //add folder
             let setItem = NSMenuItem.init()
-            setItem.title = "Add Toolset"
+            setItem.title = "Add Folder"
             setItem.representedObject = toolset
             setItem.target = self
             setItem.action = #selector(SettingViewController.addToolsetMenuClicked(_:))
             menu.addItem(setItem)
-            //startup on computer launch
-            let autorun = AutorunUtil.applicationIsInStartUpItems()
-            if !autorun {
-                let launchItem = NSMenuItem.init()
-                launchItem.title = "Enable auto launch"
-                launchItem.representedObject = toolset
-                launchItem.target = self
-                launchItem.action = #selector(SettingViewController.toggleAutorunMenuClicked(_:))
-                menu.addItem(launchItem)
-            }
-            //show in finder
-            let finderItem = NSMenuItem.init()
-            finderItem.title = "Show in Finder"
-            finderItem.representedObject = toolset
-            finderItem.target = self
-            finderItem.action = #selector(SettingViewController.finderMenuClicked(_:))
-            menu.addItem(finderItem)
-            
             menu.popUp(positioning: nil, at: point, in: sender)
         }
-    }
-    
-    @IBAction func settingButtonPressed(_ sender: Any) {
-        let point = NSZeroPoint
-        let sender = self.settingButton
-        let row = self.outlineView.selectedRow
-        if row >= 0 {
-            if let item = self.outlineView.item(atRow: row) {
-                if item is ToolSet {
-                    doActionWithToolset(item as! ToolSet,sender: sender!,point: point)
-                }else if item is ToolItem {
-                    doActionWithTool(item as! ToolItem, sender: sender!,point: point)
-                }
-            }else {
-                doActionWithRootset(sender: sender!,point: point)
-            }
-        }else {
-            doActionWithRootset(sender: sender!,point: point)
-        }
-    }
-    
-    @IBAction func reloadActionButtonPressed(_ sender: Any) {
-        MenuController.shared().reloadMenu()
     }
     
     @IBAction func homeButtonPressed(_ sender: Any) {
         let path = Config.shared().workPath()
         NSWorkspace.shared.openFile(path)
+    }
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
+        let point = NSPoint(x: addButton.bounds.size.width/2, y: addButton.bounds.size.height)
+        doActionWithRootset(sender:addButton ,point: point)
     }
     
     //add tool
@@ -368,6 +326,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
                 }
                 //save sorted order
                 ToolService.shared().doSaveToolsetOrder(toolSet!)
+                MenuController.shared().reloadMenu()
             }
         }
     }
@@ -433,14 +392,10 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
                 }
                 //save sorted order
                 ToolService.shared().doSaveToolsetOrder(toolSet!)
+                MenuController.shared().reloadMenu()
                 resetEditArea()
             }
         }
-    }
-    
-    //enable auto run
-    @objc func toggleAutorunMenuClicked(_ menuItem: NSMenuItem) {
-        AutorunUtil.toggleLaunchAtStartup()
     }
     
     //show in finder
@@ -482,6 +437,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             self.outlineView.selectRowIndexes(IndexSet.init(integer: toolIndex), byExtendingSelection: false)
             //save sorted order
             ToolService.shared().doSaveToolsetOrder(toolset)
+            MenuController.shared().reloadMenu()
         }
         addVC.cancelCallback = {() -> Void in
             self.resetEditArea()
@@ -503,6 +459,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         addVC.completionCallback = {(toolItem: ToolItem) -> Void in
             self.outlineView.reloadItem(toolItem)
             self.resetEditArea()
+            MenuController.shared().reloadMenu()
         }
         addVC.cancelCallback = {() -> Void in
             self.resetEditArea()
@@ -535,6 +492,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             self.outlineView.selectRowIndexes(IndexSet.init(integer: toolIndex), byExtendingSelection: false)
             //save sorted order
             ToolService.shared().doSaveToolsetOrder(toolset)
+            MenuController.shared().reloadMenu()
         }
         addVC.cancelCallback = {() -> Void in
             self.resetEditArea()
@@ -556,6 +514,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         addVC.completionCallback = {(toolItem: ToolItem) -> Void in
             self.outlineView.reloadItem(toolItem)
             self.resetEditArea()
+            MenuController.shared().reloadMenu()
         }
         addVC.cancelCallback = {() -> Void in
             self.resetEditArea()
@@ -588,6 +547,7 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
             self.outlineView.selectRowIndexes(IndexSet.init(integer: setIndex), byExtendingSelection: false)
             //save sorted order
             ToolService.shared().doSaveToolsetOrder(parentSet)
+            MenuController.shared().reloadMenu()
         }
         addVC.cancelCallback = {() -> Void in
             self.resetEditArea()
@@ -609,11 +569,33 @@ class SettingViewController: NSViewController,NSOutlineViewDataSource,NSOutlineV
         addVC.completionCallback = { (toolset: ToolSet) -> Void in
             self.outlineView.reloadItem(toolset)
             self.resetEditArea()
+            MenuController.shared().reloadMenu()
         }
         addVC.cancelCallback = {() -> Void in
             self.resetEditArea()
         }
         self.editDefaultLayout.isHidden = true
+    }
+    
+    override func rightMouseUp(with event: NSEvent) {
+        super.rightMouseUp(with: event)
+        let windowPos = event.locationInWindow
+        let point = self.view.convert(windowPos, from: nil)
+        let sender = self.view
+        let row = self.outlineView.selectedRow
+        if row >= 0 {
+            if let item = self.outlineView.item(atRow: row) {
+                if item is ToolSet {
+                    doActionWithToolset(item as! ToolSet,sender: sender,point: point)
+                }else if item is ToolItem {
+                    doActionWithTool(item as! ToolItem, sender: sender,point: point)
+                }
+            }else {
+                doActionWithRootset(sender: sender,point: point)
+            }
+        }else {
+            doActionWithRootset(sender: sender,point: point)
+        }
     }
     
     

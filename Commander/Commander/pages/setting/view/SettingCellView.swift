@@ -19,11 +19,16 @@ class SettingCellView: BaseCellView {
         if item is ToolItem {
             let toolItem = item as! ToolItem
             self.titleLabel.stringValue = toolItem.title
-            if toolItem.appId != nil {
-                self.iconImageView.image = NSImage.init(named:NSImage.actionTemplateName);
-            }else {
-                self.iconImageView.image = NSImage.init(named: "tool")
+            if let image = NSImage.init(contentsOfFile: toolItem.iconPath()) {
+                self.iconImageView.image = image
+            } else {
+                if toolItem.appId != nil {
+                    self.iconImageView.image = NSImage.init(named:NSImage.actionTemplateName);
+                }else {
+                    self.iconImageView.image = NSImage.init(named: "tool")
+                }
             }
+            
         }else if item is ToolSet {
             let toolSet = item as! ToolSet
             self.titleLabel.stringValue = toolSet.title
